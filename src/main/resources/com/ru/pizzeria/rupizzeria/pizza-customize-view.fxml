@@ -10,15 +10,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.pizzeria.rupizzeria.RuPizzeriaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.pizzeria.rupizzeria.RuPizzaCustomizeController">
    <children>
-      <Button alignment="CENTER" contentDisplay="TOP" layoutX="24.0" layoutY="52.0" mnemonicParsing="false" prefHeight="202.0" prefWidth="220.0" text="Deluxe Pizza">
+      <Button fx:id="pizzaButton" alignment="CENTER" contentDisplay="TOP" layoutX="24.0" layoutY="52.0" mnemonicParsing="false" prefHeight="202.0" prefWidth="220.0" text="Deluxe Pizza">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
          <graphic>
-            <ImageView fitHeight="140.0" fitWidth="159.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="pizzaImage" fitHeight="140.0" fitWidth="159.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../../../JavaFXTuition/src/main/resources/com/pics/deluxePizza.jpg" />
                </image>
@@ -51,7 +50,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <ComboBox layoutX="311.0" layoutY="52.0" prefWidth="150.0" />
+      <ComboBox fx:id="myComboBox" layoutX="311.0" layoutY="52.0" onAction="#selectPizzaSize" prefWidth="150.0" promptText="Size" />
       <ListView layoutX="24.0" layoutY="363.0" prefHeight="200.0" prefWidth="200.0" />
       <Label layoutX="375.0" layoutY="323.0" text="Selected Toppings">
          <font>

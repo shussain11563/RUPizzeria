@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.pizzeria.rupizzeria.RuPizzeriaController">
    <children>
       <Button layoutX="376.0" layoutY="441.0" mnemonicParsing="false" onAction="#openCurrentOrdersWindow" prefHeight="62.0" prefWidth="249.0" text="Current Orders">
@@ -15,7 +14,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" contentDisplay="TOP" layoutX="91.0" layoutY="161.0" mnemonicParsing="false" onAction="#openCustomizePizzaWindow" prefHeight="202.0" prefWidth="220.0" text="Deluxe Pizza">
+      <Button fx:id="deluxePizzaButton" alignment="CENTER" contentDisplay="TOP" layoutX="91.0" layoutY="161.0" mnemonicParsing="false" onAction="#openDeluxeCustomizePizzaWindow" prefHeight="202.0" prefWidth="220.0" text="Deluxe Pizza">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -27,7 +26,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button alignment="CENTER" contentDisplay="TOP" layoutX="379.0" layoutY="161.0" mnemonicParsing="false" onAction="#openCustomizePizzaWindow" prefHeight="202.0" prefWidth="220.0" text="Hawaiian Pizza">
+      <Button fx:id="hawaiianPizzaButton" alignment="CENTER" contentDisplay="TOP" layoutX="379.0" layoutY="161.0" mnemonicParsing="false" onAction="#openHawaiianCustomizePizzaWindow" prefHeight="202.0" prefWidth="220.0" text="Hawaiian Pizza">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -39,7 +38,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button alignment="CENTER" contentDisplay="TOP" layoutX="687.0" layoutY="161.0" mnemonicParsing="false" onAction="#openCustomizePizzaWindow" prefHeight="202.0" prefWidth="220.0" text="Pepperoni Pizza">
+      <Button fx:id="pepperoniPizzaButton" alignment="CENTER" contentDisplay="TOP" layoutX="687.0" layoutY="161.0" mnemonicParsing="false" onAction="#openPepperoniCustomizePizzaWindow" prefHeight="202.0" prefWidth="220.0" text="Pepperoni Pizza">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
