@@ -2,7 +2,9 @@ package com.ru.pizzeria.rupizzeria;
 
 public class Hawaiian extends Pizza
 {
-    static final double MIN_PRICE = 10.99;
+    private static final double MIN_COST = 10.99;
+    private static final int MIN_TOPPING = 2;
+
     public Hawaiian()
     {
         this.toppings.add(Topping.Pineapple);
