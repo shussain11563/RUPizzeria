@@ -20,4 +20,16 @@ public class Order
         //String phoneNumbe
 
     }
+
+    public static void addPizza(Pizza pizza)
+    {
+
+    }
+
+    public static void removePizza(Pizza pizza)
+    {
+
+    }
+
+
 }

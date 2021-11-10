@@ -11,6 +11,16 @@ public class StoreOrders
         orders = new ArrayList<Order>();
     }
 
+    public static void addOrder(Order order)
+    {
+
+    }
+
+    public static void removeOrder(Order order)
+    {
+
+    }
+
     //not sure about signature
     public static void export()
     {

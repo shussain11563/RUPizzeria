@@ -15,6 +15,16 @@ public abstract class Pizza
     protected Size size;
     public abstract double price();
 
+    public static void addTopping(Topping topping)
+    {
+
+    }
+
+    public static void removeTopping(Topping topping)
+    {
+
+    }
+
     //add Toppings
     //remove toppings
 
