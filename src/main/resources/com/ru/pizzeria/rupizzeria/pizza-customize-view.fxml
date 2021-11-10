@@ -44,26 +44,26 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextArea layoutX="711.0" layoutY="319.0" prefHeight="25.0" prefWidth="160.0" />
-      <Button layoutX="636.0" layoutY="385.0" mnemonicParsing="false" text="Add to Order">
+      <TextArea fx:id="priceTextArea" layoutX="711.0" layoutY="319.0" prefHeight="25.0" prefWidth="160.0" />
+      <Button layoutX="636.0" layoutY="385.0" mnemonicParsing="false" onAction="#addOrder" text="Add to Order">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
       <ComboBox fx:id="myComboBox" layoutX="311.0" layoutY="52.0" onAction="#selectPizzaSize" prefWidth="150.0" promptText="Size" />
-      <ListView layoutX="24.0" layoutY="363.0" prefHeight="200.0" prefWidth="200.0" />
+      <ListView fx:id="additionalToppingsListView" layoutX="24.0" layoutY="363.0" prefHeight="200.0" prefWidth="200.0" />
       <Label layoutX="375.0" layoutY="323.0" text="Selected Toppings">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <ListView layoutX="374.0" layoutY="363.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button layoutX="244.0" layoutY="388.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="116.0" text="Add &gt;&gt;">
+      <ListView fx:id="selectedToppingsListView" layoutX="374.0" layoutY="363.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button layoutX="244.0" layoutY="388.0" mnemonicParsing="false" onAction="#addToppings" prefHeight="38.0" prefWidth="116.0" text="Add &gt;&gt;">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Button>
-      <Button layoutX="244.0" layoutY="491.0" mnemonicParsing="false" text="&lt;&lt; Remove">
+      <Button layoutX="244.0" layoutY="491.0" mnemonicParsing="false" onAction="#removeToppings" text="&lt;&lt; Remove">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
