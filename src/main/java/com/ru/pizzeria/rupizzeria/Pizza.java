@@ -14,7 +14,7 @@ public abstract class Pizza
     //static final MAX_TOPPINGS = 7;
     //static final
     protected ArrayList<Topping> toppings = new ArrayList<Topping>();
-    //protected Size size;
+    protected Size size;
     public abstract double price();
 
     public boolean addTopping(Topping topping)
@@ -45,6 +45,7 @@ public abstract class Pizza
 
     public double calculateSalesTax()
     {
+        return 0;
         //r
 
     }
