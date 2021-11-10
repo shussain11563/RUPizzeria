@@ -10,6 +10,7 @@ public class Order
     private String phoneNumber;
     private ArrayList<Pizza> pizzas;
 
+
     public Order(String phoneNumber)
     {
         //contains an order number
@@ -21,14 +22,14 @@ public class Order
 
     }
 
-    public static void addPizza(Pizza pizza)
+    public void addPizza(Pizza pizza)
     {
-
+        //this.pizzas.add(pizza);
     }
 
-    public static void removePizza(Pizza pizza)
+    public void removePizza(Pizza pizza)
     {
-
+        //this.pizzas.remove(pizza);
     }
 
 

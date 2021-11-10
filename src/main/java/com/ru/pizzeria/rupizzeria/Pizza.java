@@ -6,6 +6,8 @@ public abstract class Pizza
 {
     static final double SALES_TAX_RATE = 6.625;
     static final int MAX_TOPPINGS = 7;
+    static final double SIZE_INCREASE_COST = 2;
+    static final double ADDITIONAL_TOPPINGS_COST = 1.49;
 
     //MAX TOPPINGS
 
@@ -15,21 +17,37 @@ public abstract class Pizza
     protected Size size;
     public abstract double price();
 
-    public static void addTopping(Topping topping)
+    public boolean addTopping(Topping topping)
     {
+        if(this.toppings.contains(topping))
+        {
+            return false;
+        }
 
+        if(MAX_TOPPINGS == this.toppings.size())
+        {
+            return false;
+        }
+
+        this.toppings.add(topping);
+        return true;
     }
 
-    public static void removeTopping(Topping topping)
+    public boolean removeTopping(Topping topping)
     {
-
+        if(this.toppings.contains(topping))
+        {
+            this.toppings.remove(topping);
+            return true;
+        }
+        return false;
     }
 
     //add Toppings
     //remove toppings
 
     //check if no repeating tippings
-    .//max toppings
+    //max toppings
 
 
 
