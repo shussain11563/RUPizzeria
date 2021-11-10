@@ -13,6 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class RuPizzaCustomizeController implements Initializable {
@@ -72,6 +74,39 @@ public class RuPizzaCustomizeController implements Initializable {
 
     public void setPizzaText(String text) {
         pizzaButton.setText(text);
+    }
+
+    public void setOrignalPizzaToppings(String text) {
+        if(text.equals("Deluxe Pizza")) {
+            List<String> values = Arrays.asList("Sausage", "Onion", "Green Pepper", "Black Olives", "Diced Tomatoes");
+            selectedToppingsListView.setItems(FXCollections.observableList(values));
+        }
+        else if(text.equals("Hawaiian Pizza")) {
+            List<String> values = Arrays.asList("Pineapple", "Ham");
+            selectedToppingsListView.setItems(FXCollections.observableList(values));
+        }
+        else if(text.equals("Pepperoni Pizza")) {
+            List<String> values = Arrays.asList("Pepperoni");
+            selectedToppingsListView.setItems(FXCollections.observableList(values));
+        }
+    }
+
+    public void setAdditionalPizzaToppings(String text) {
+        if(text.equals("Deluxe Pizza")) {
+            List<String> values = Arrays.asList("Pineapple", "Pepperoni",  "Ham", "Mushroom", "Chicken", "Beef",
+                    "Salami", "Spinach");
+            additionalToppingsListView.setItems(FXCollections.observableList(values));
+        }
+        else if(text.equals("Hawaiian Pizza")) {
+            List<String> values = Arrays.asList("Pepperoni", "Mushroom", "Onion", "Sausage", "Chicken", "Beef",
+                    "Salami", "Spinach", "Black Olives", "GreenPepper", "DicedTomatoes");
+            additionalToppingsListView.setItems(FXCollections.observableList(values));
+        }
+        else if(text.equals("Pepperoni Pizza")) {
+            List<String> values = Arrays.asList("Pineapple", "Ham", "Mushroom", "Onion", "Sausage", "Chicken", "Beef",
+                    "Salami", "Spinach", "Black Olives", "GreenPepper", "DicedTomatoes");
+            additionalToppingsListView.setItems(FXCollections.observableList(values));
+        }
     }
 
     @FXML
