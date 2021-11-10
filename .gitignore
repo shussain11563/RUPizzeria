@@ -21,3 +21,6 @@ target/classes/com/ru/pizzeria/rupizzeria/pizzeria-view.fxml
 target/classes/com/ru/pizzeria/rupizzeria/RuPizzeriaApplication.class
 target/classes/com/ru/pizzeria/rupizzeria/RuPizzeriaController.class
 target/classes/module-info.class
+target/classes/com/ru/pizzeria/rupizzeria/RuPizzeriaApplication.class
+target/classes/com/ru/pizzeria/rupizzeria/RuPizzeriaController.class
+*.class
