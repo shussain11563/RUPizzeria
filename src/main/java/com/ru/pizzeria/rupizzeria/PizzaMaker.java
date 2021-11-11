@@ -1,25 +1,24 @@
 package com.ru.pizzeria.rupizzeria;
 
+
 public class PizzaMaker
 {
     public static Pizza createPizza(String flavor)
     {
-        Pizza pizza;
+        Pizza pizza = null;
 
-
-        if(flavor.equals(""))
+        if(flavor.toLowerCase().equals("pepperoni"))
         {
-
+            pizza = new Pepperoni();
         }
-        pizza = new Pepperoni();
-
-
-        pizza = new Deluxe();
-
-
-        pizza = new Hawaiian();
-
-
+        else if(flavor.toLowerCase().equals("deluxe"))
+        {
+            pizza = new Deluxe();
+        }
+        else if(flavor.toLowerCase().equals("hawaiian"))
+        {
+            pizza = new Hawaiian();
+        }
 
         return pizza;
 //write the code for creating different instances of subtypes of pizza

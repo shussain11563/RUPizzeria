@@ -3,8 +3,8 @@ package com.ru.pizzeria.rupizzeria;
 public class Pepperoni extends Pizza
 {
     //make private
-    static final double MIN_COST = 8.99;
-    static final int MIN_TOPPING = 1;
+    private static final double MIN_COST = 8.99;
+    private static final int MIN_TOPPING = 1;
 
 
     public Pepperoni()
