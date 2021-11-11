@@ -68,7 +68,9 @@ public class RuPizzaCustomizeController implements Initializable {
         //System.out.println(mainController.deluxePizzaButton.getText()); //BUG, ONLY PRINTS DELUXE PIZZA
 
         //create pizza
-        String pizzaFlavor = ""; //add to order
+        String pizzaFlavor = pizzaButton.getText();
+        System.out.println(pizzaFlavor);
+        //String pizzaFlavor = ""; //add to order
         Pizza pizza = PizzaMaker.createPizza(pizzaFlavor); //null
         this.pizza = pizza;
         if(this.pizza == null)

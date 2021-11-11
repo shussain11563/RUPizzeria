@@ -8,15 +8,15 @@ public class PizzaMaker
         Pizza pizza = null;
         //use switch cases
 
-        if(flavor.toLowerCase().equals("pepperoni"))
+        if(flavor.toLowerCase().equals("pepperoni pizza"))
         {
             pizza = new Pepperoni();
         }
-        else if(flavor.toLowerCase().equals("deluxe"))
+        else if(flavor.toLowerCase().equals("deluxe pizza"))
         {
             pizza = new Deluxe();
         }
-        else if(flavor.toLowerCase().equals("hawaiian"))
+        else if(flavor.toLowerCase().equals("hawaiian pizza"))
         {
             pizza = new Hawaiian();
         }
