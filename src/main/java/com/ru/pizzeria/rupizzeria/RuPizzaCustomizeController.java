@@ -65,6 +65,7 @@ public class RuPizzaCustomizeController implements Initializable {
         //CcomboBox
         //System.out.println(mainController.deluxePizzaButton.getText()); //BUG, ONLY PRINTS DELUXE PIZZA
 
+        //create pizza
         String pizzaFlavor = ""; //add to order
         Pizza pizza = PizzaMaker.createPizza(pizzaFlavor); //null
         if(pizza != null)
@@ -73,25 +74,19 @@ public class RuPizzaCustomizeController implements Initializable {
         }
         pizza = PizzaMaker.createPizza("deluxe");
 
-        //DOES N0T MATTER WAHT PIZZA TYPE, WORKS UNIVERSALLY
+        //listview
         ArrayList<Topping> selectedToppings = pizza.getToppings();
         ArrayList<Topping> allToppings = new ArrayList<Topping>(Arrays.asList(Topping.values()));
         allToppings.removeAll(selectedToppings);
         ArrayList<Topping> additionalToppings = allToppings;
         System.out.println(allToppings); //gives you an arraylist of the nonselected toppings
-
         ObservableList<Topping> selectedToppingsList = FXCollections.observableArrayList(selectedToppings);
         selectedToppingsListView.setItems(FXCollections.observableList(selectedToppingsList));
-
         ObservableList<Topping> additionalToppingsList = FXCollections.observableArrayList(additionalToppings);
         additionalToppingsListView.setItems(FXCollections.observableList(additionalToppingsList));
 
 
-        /*
-
-         */
-
-
+        //comboBox
         ObservableList<Size> options =  FXCollections.observableList(Arrays.asList(Size.values()));
         myComboBox.setItems(options);
         myComboBox.setValue(Size.Small); //default value
