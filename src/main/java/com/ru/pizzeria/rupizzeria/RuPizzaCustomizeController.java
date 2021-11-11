@@ -10,10 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class RuPizzaCustomizeController implements Initializable {
     /*
@@ -22,7 +19,11 @@ public class RuPizzaCustomizeController implements Initializable {
     Max number of toppings is 7
     Order Comfirmation when pressing add
 
+    pr
      */
+
+    private RuPizzeriaController mainController;
+
     @FXML
     private Button pizzaButton;
 
@@ -36,10 +37,16 @@ public class RuPizzaCustomizeController implements Initializable {
     private TextArea priceTextArea;
 
     @FXML
-    private ListView<String> selectedToppingsListView;
+    private ListView<Topping> selectedToppingsListView;
 
     @FXML
-    private ListView<String> additionalToppingsListView;
+    private ListView<Topping> additionalToppingsListView;
+
+    public void setMainController(RuPizzeriaController controller)
+    {
+
+        mainController = controller;
+    }
 
     @FXML
     void selectPizzaSize(ActionEvent event) {
@@ -51,10 +58,36 @@ public class RuPizzaCustomizeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        System.out.println("Hello");
-        Size[] sizes = Size.values();
-        List<Size> values = Arrays.asList(sizes);
-        ObservableList<Size> options =  FXCollections.observableList(values);
+
+        //mainController.printHello();
+
+
+        //CcomboBox
+        //System.out.println(mainController.deluxePizzaButton.getText()); //BUG, ONLY PRINTS DELUXE PIZZA
+
+        //create pizza
+        String pizzaFlavor = ""; //add to order
+        Pizza pizza = PizzaMaker.createPizza(pizzaFlavor); //null
+        if(pizza != null)
+        {
+            //
+        }
+        pizza = PizzaMaker.createPizza("deluxe");
+
+        //listview
+        ArrayList<Topping> selectedToppings = pizza.getToppings();
+        ArrayList<Topping> allToppings = new ArrayList<Topping>(Arrays.asList(Topping.values()));
+        allToppings.removeAll(selectedToppings);
+        ArrayList<Topping> additionalToppings = allToppings;
+        System.out.println(allToppings); //gives you an arraylist of the nonselected toppings
+        ObservableList<Topping> selectedToppingsList = FXCollections.observableArrayList(selectedToppings);
+        selectedToppingsListView.setItems(FXCollections.observableList(selectedToppingsList));
+        ObservableList<Topping> additionalToppingsList = FXCollections.observableArrayList(additionalToppings);
+        additionalToppingsListView.setItems(FXCollections.observableList(additionalToppingsList));
+
+
+        //comboBox
+        ObservableList<Size> options =  FXCollections.observableList(Arrays.asList(Size.values()));
         myComboBox.setItems(options);
         myComboBox.setValue(Size.Small); //default value
     }
@@ -84,7 +117,7 @@ public class RuPizzaCustomizeController implements Initializable {
 
     public void setOrignalPizzaToppings(String text)
     {
-
+        /*
         if(text.equals("Deluxe Pizza")) {
             ObservableList<String> items = FXCollections.observableArrayList("Sausage", "Onion", "Green Pepper", "Black Olives", "Diced Tomatoes");
             selectedToppingsListView.setItems(FXCollections.observableList(items));
@@ -97,12 +130,17 @@ public class RuPizzaCustomizeController implements Initializable {
             ObservableList<String> items = FXCollections.observableArrayList("Pepperoni");
             selectedToppingsListView.setItems(FXCollections.observableList(items));
         }
+
+         */
     }
 
     //use obejct
-    public void setAdditionalPizzaToppings(String text) {
+    public void setAdditionalPizzaToppings(String text)
+    {
+        /*
 
-        if(text.equals("Deluxe Pizza")) {
+        if(text.equals("Deluxe Pizza"))
+        {
             ObservableList<String> items = FXCollections.observableArrayList("Pineapple", "Pepperoni",  "Ham", "Mushroom", "Chicken", "Beef",
 
                     "Salami", "Spinach");
@@ -122,6 +160,8 @@ public class RuPizzaCustomizeController implements Initializable {
             additionalToppingsListView.getItems().clear();
             additionalToppingsListView.setItems(FXCollections.observableList(items));
         }
+
+         */
     }
 
     @FXML
@@ -130,7 +170,8 @@ public class RuPizzaCustomizeController implements Initializable {
     }
 
     @FXML
-    void removeToppings(ActionEvent event) {
+    void removeToppings(ActionEvent event)
+    {/*
         if(selectedToppingsListView.getSelectionModel().getSelectedItem() != null) {
             if(pizzaButton.getText().equals("Deluxe Pizza")) {
                 if(checkDeluxeToppings(selectedToppingsListView.getSelectionModel().getSelectedItem())) {
@@ -151,21 +192,25 @@ public class RuPizzaCustomizeController implements Initializable {
                 }
             }
         }
+        */
 
     }
 
     @FXML
 
-    void addToppings(ActionEvent event) {
-        if(additionalToppingsListView.getSelectionModel().getSelectedItem() != null) {
-            if(selectedToppingsListView.getItems().size() < 7) {
+    void addToppings(ActionEvent event)
+    {
+        if(additionalToppingsListView.getSelectionModel().getSelectedItem() != null)
+        {
+            if(selectedToppingsListView.getItems().size() < Pizza.MAX_TOPPINGS)
+            {
                 selectedToppingsListView.getItems().add(additionalToppingsListView.getSelectionModel().getSelectedItem());
                 additionalToppingsListView.getItems().remove(additionalToppingsListView.getSelectionModel().getSelectedItem());
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR WITH TOPPINGS");
                 alert.setHeaderText("Maximum numbers of toppings");
-                alert.setContentText("You can only have atmost 7 toppings");
+                alert.setContentText("You can only have at most 7 toppings");
                 alert.showAndWait();
             }
 
@@ -180,14 +225,6 @@ public class RuPizzaCustomizeController implements Initializable {
         }
         return true;
     }
-
-//    public boolean checkPepperoniToppings() {
-//
-//    }
-//
-//    public boolean checkHawaiianToppings() {
-//
-//    }
 
 
 }

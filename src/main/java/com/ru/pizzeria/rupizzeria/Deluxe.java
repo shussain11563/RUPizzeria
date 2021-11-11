@@ -23,7 +23,7 @@ public class Deluxe extends Pizza {
         ArrayList<Topping> allToppings = new ArrayList<Topping>(Arrays.asList(Topping.values()));
 
         allToppings.removeAll(toppingsSelected);
-        System.out.println(allToppings);
+        System.out.println(allToppings); //gives you an arraylist of the nonselected toppings
 
         //we get an arraylist
 

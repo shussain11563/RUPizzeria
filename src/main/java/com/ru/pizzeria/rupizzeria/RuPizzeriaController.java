@@ -3,15 +3,19 @@ package com.ru.pizzeria.rupizzeria;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
+import java.util.function.ObjDoubleConsumer;
 
-public class RuPizzeriaController {
+public class RuPizzeriaController implements Initializable {
     @FXML
     private Button deluxePizzaButton;
 
@@ -23,6 +27,21 @@ public class RuPizzeriaController {
 
     @FXML
     private TextField customerPhoneNumber;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources)
+    {
+        //Order orderTest = new Order("11111144444");
+        System.out.println("Hi");
+        //order
+        //initialize
+
+    }
+
+    private void printHello()
+    {
+        System.out.println("Hi");
+    }
 
     @FXML
     void openCurrentOrdersWindow(ActionEvent event) throws IOException {
@@ -45,6 +64,15 @@ public class RuPizzeriaController {
     }
 
     @FXML
+    void openPizzaWindow()
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("pizza-customize-view.fxml"));
+        RuPizzaCustomizeController pizzaView = loader.getController();
+
+        pizzaView.setMainController(this);
+    }
+
+    @FXML
     void openDeluxeCustomizePizzaWindow(ActionEvent event) throws IOException {
         if(checkPhoneNumber(customerPhoneNumber.getText().trim())) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -61,6 +89,10 @@ public class RuPizzeriaController {
                 setController.setPizzaPicture(deluxePizzaButton.getText());
                 setController.setOrignalPizzaToppings(deluxePizzaButton.getText());
                 setController.setAdditionalPizzaToppings(deluxePizzaButton.getText());
+                //openPizzaWindow(); //remove this
+
+                //remove this
+                //setController.setMainController(this);
 
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root, 900, 700));
