@@ -25,7 +25,7 @@ public class RuPizzaCustomizeController implements Initializable {
     private Button pizzaButton;
 
     @FXML
-    private ComboBox<String> myComboBox;
+    private ComboBox<Size> myComboBox;
 
     @FXML
     private ImageView pizzaImage;
@@ -41,12 +41,20 @@ public class RuPizzaCustomizeController implements Initializable {
 
     @FXML
     void selectPizzaSize(ActionEvent event) {
-        String temp = myComboBox.getSelectionModel().getSelectedItem().toString();
+        Size selectedItem = myComboBox.getSelectionModel().getSelectedItem();
+
+        //System.out.println(selectedItem);
     }
+
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<String> options = FXCollections.observableArrayList("Small", "Medium", "Large");
+    public void initialize(URL location, ResourceBundle resources)
+    {
+        System.out.println("Hello");
+        Size[] sizes = Size.values();
+        List<Size> values = Arrays.asList(sizes);
+        ObservableList<Size> options =  FXCollections.observableList(values);
         myComboBox.setItems(options);
+        myComboBox.setValue(Size.Small); //default value
     }
 
     public void setPizzaPicture(String text) {
@@ -72,7 +80,9 @@ public class RuPizzaCustomizeController implements Initializable {
         pizzaButton.setText(text);
     }
 
-    public void setOrignalPizzaToppings(String text) {
+    public void setOrignalPizzaToppings(String text)
+    {
+
         if(text.equals("Deluxe Pizza")) {
             ObservableList<String> items = FXCollections.observableArrayList("Sausage", "Onion", "Green Pepper", "Black Olives", "Diced Tomatoes");
             selectedToppingsListView.setItems(FXCollections.observableList(items));
@@ -87,9 +97,16 @@ public class RuPizzaCustomizeController implements Initializable {
         }
     }
 
+    //use obejct
     public void setAdditionalPizzaToppings(String text) {
+
+        if(text.equals("Deluxe Pizza"))
+        {
+            List<String> values = Arrays.asList("Pineapple", "Pepperoni",  "Ham", "Mushroom", "Chicken", "Beef",
+
         if(text.equals("Deluxe Pizza")) {
             ObservableList<String> items = FXCollections.observableArrayList("Pineapple", "Pepperoni",  "Ham", "Mushroom", "Chicken", "Beef",
+
                     "Salami", "Spinach");
             additionalToppingsListView.getItems().clear();
             additionalToppingsListView.setItems(FXCollections.observableList(items));
@@ -140,6 +157,7 @@ public class RuPizzaCustomizeController implements Initializable {
     }
 
     @FXML
+
     void addToppings(ActionEvent event) {
         if(additionalToppingsListView.getSelectionModel().getSelectedItem() != null) {
             if(selectedToppingsListView.getItems().size() < 7) {
@@ -158,6 +176,7 @@ public class RuPizzaCustomizeController implements Initializable {
     public boolean checkDeluxeToppings(String selectedItem) {
         if(selectedItem.equals("Sausage") || selectedItem.equals("Onion") || selectedItem.equals("Green Pepper")
                 || selectedItem.equals("Black Olives") || selectedItem.equals("Diced Tomatoes")) {
+
 
             return false;
         }

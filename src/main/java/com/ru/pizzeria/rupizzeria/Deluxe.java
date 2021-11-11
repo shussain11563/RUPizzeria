@@ -1,12 +1,14 @@
 package com.ru.pizzeria.rupizzeria;
 
-public class Deluxe extends Pizza
-{
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Deluxe extends Pizza {
     private static final double MIN_COST = 12.99;
     private static final int MIN_TOPPING = 5;
 
-    public Deluxe()
-    {
+    public Deluxe() {
         //use collection
         this.toppings.add(Topping.Sausage);
         this.toppings.add(Topping.Onion);
@@ -15,9 +17,39 @@ public class Deluxe extends Pizza
         this.toppings.add(Topping.DicedTomatoes);
     }
 
+    public void test()
+    {
+        ArrayList<Topping> toppingsSelected = this.toppings;
+        ArrayList<Topping> allToppings = new ArrayList<Topping>(Arrays.asList(Topping.values()));
+
+        allToppings.removeAll(toppingsSelected);
+        System.out.println(allToppings);
+
+        //we get an arraylist
+
+    }
+
     @Override
     public double price()
     {
-        return 0;
+        double runningCost = 0;
+        runningCost += MIN_COST;
+
+        double sizeCost = calculateSizeOfPizza();
+
+        runningCost += sizeCost;
+
+        for(int i = this.MIN_TOPPING; i < toppings.size(); i++)
+        {
+            runningCost += Pizza.ADDITIONAL_TOPPINGS_COST;
+        }
+
+        return runningCost;
+    }
+
+    public static void main(String[] arg)
+    {
+        Deluxe pizza = new Deluxe();
+        pizza.test();
     }
 }

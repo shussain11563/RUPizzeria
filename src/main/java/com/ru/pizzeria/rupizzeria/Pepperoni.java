@@ -16,8 +16,13 @@ public class Pepperoni extends Pizza
     @Override
     public double price()
     {
+        //min cost
         double runningCost = 0;
         runningCost += MIN_COST;
+
+        double sizeCost = calculateSizeOfPizza();
+
+        runningCost += sizeCost;
 
         for(int i = this.MIN_TOPPING; i < toppings.size(); i++)
         {
@@ -25,5 +30,8 @@ public class Pepperoni extends Pizza
         }
 
         return runningCost;
+
+
+        // add sales tax
     }
 }

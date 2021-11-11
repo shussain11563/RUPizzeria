@@ -6,6 +6,7 @@ public class PizzaMaker
     public static Pizza createPizza(String flavor)
     {
         Pizza pizza = null;
+        //use switch cases
 
         if(flavor.toLowerCase().equals("pepperoni"))
         {

@@ -24,11 +24,13 @@ public class Order
 
     public void addPizza(Pizza pizza)
     {
+        this.pizzas.add(pizza);
         //this.pizzas.add(pizza);
     }
 
     public void removePizza(Pizza pizza)
     {
+        this.pizzas.remove(pizza);
         //this.pizzas.remove(pizza);
     }
 

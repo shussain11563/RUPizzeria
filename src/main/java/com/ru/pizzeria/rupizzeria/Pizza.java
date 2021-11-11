@@ -14,7 +14,7 @@ public abstract class Pizza
     //static final MAX_TOPPINGS = 7;
     //static final
     protected ArrayList<Topping> toppings = new ArrayList<Topping>();
-    //protected Size size;
+    protected Size size;
     public abstract double price();
 
     public boolean addTopping(Topping topping)
@@ -45,10 +45,29 @@ public abstract class Pizza
 
     public double calculateSalesTax()
     {
+        return 0;
         //r
 
     }
 
+
+    public double calculateSizeOfPizza()
+    {
+        double sizeCost = 0;
+
+        //make this a whole method??
+        switch (this.size)
+        {
+            case Small:
+                sizeCost = 0;
+            case Medium:
+                sizeCost += SIZE_INCREASE_COST;
+            case Large:
+                sizeCost += (SIZE_INCREASE_COST + SIZE_INCREASE_COST);
+        }
+
+        return sizeCost;
+    }
     //add Toppings
     //remove toppings
 
