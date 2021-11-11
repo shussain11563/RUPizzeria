@@ -126,10 +126,45 @@ public class RuPizzaCustomizeController implements Initializable {
 
     @FXML
     void removeToppings(ActionEvent event)
-    {/*
-        if(selectedToppingsListView.getSelectionModel().getSelectedItem() != null) {
+    {
+        if(selectedToppingsListView.getSelectionModel().getSelectedItem() != null)
+        {
+            if(selectedToppingsListView.getItems().size() > 0)
+            {
+                Topping topping = selectedToppingsListView.getSelectionModel().getSelectedItem();
+                additionalToppingsListView.getItems().add(topping);
+                selectedToppingsListView.getItems().remove(topping);
+                this.pizza.removeTopping(topping);
+            }
+            else if(selectedToppingsListView.getItems().size() <= 0)
+            {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Warning with Removing Toppings");
+                alert.setHeaderText("Removing Toppings");
+                alert.setContentText("No Toppings on Pizza");
+                Optional<ButtonType> result = alert.showAndWait();
+            }
+            else //this does not run, must change
+            {
+                //fix the
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Warning with Removing Toppings");
+                alert.setHeaderText("Removing Toppings");
+                alert.setContentText("You are removing essential toppings");
+                Optional<ButtonType> result = alert.showAndWait();
+
+                if(result.get() == ButtonType.OK) {
+                    additionalToppingsListView.getItems().add(selectedToppingsListView.getSelectionModel().getSelectedItem());
+                    selectedToppingsListView.getItems().remove(selectedToppingsListView.getSelectionModel().getSelectedItem());
+                }
+
+            }
+
+        }
+        /*{
             if(pizzaButton.getText().equals("Deluxe Pizza")) {
-                if(checkDeluxeToppings(selectedToppingsListView.getSelectionModel().getSelectedItem())) {
+                if(checkDeluxeToppings(selectedToppingsListView.getSelectionModel().getSelectedItem()))
+                {
                     additionalToppingsListView.getItems().add(selectedToppingsListView.getSelectionModel().getSelectedItem());
                     selectedToppingsListView.getItems().remove(selectedToppingsListView.getSelectionModel().getSelectedItem());
                 }
@@ -147,8 +182,8 @@ public class RuPizzaCustomizeController implements Initializable {
                 }
             }
         }
-        */
 
+        */
     }
 
     @FXML
