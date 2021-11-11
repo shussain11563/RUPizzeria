@@ -24,6 +24,8 @@ public class RuPizzaCustomizeController implements Initializable {
 
     private RuPizzeriaController mainController;
 
+    private Pizza pizza;
+
     @FXML
     private Button pizzaButton;
 
@@ -68,14 +70,14 @@ public class RuPizzaCustomizeController implements Initializable {
         //create pizza
         String pizzaFlavor = ""; //add to order
         Pizza pizza = PizzaMaker.createPizza(pizzaFlavor); //null
-        if(pizza != null)
+        this.pizza = pizza;
+        if(this.pizza == null)
         {
-            //
+            System.out.println("Line 76");
         }
-        pizza = PizzaMaker.createPizza("deluxe");
 
         //listview
-        ArrayList<Topping> selectedToppings = pizza.getToppings();
+        ArrayList<Topping> selectedToppings = this.pizza.getToppings();
         ArrayList<Topping> allToppings = new ArrayList<Topping>(Arrays.asList(Topping.values()));
         allToppings.removeAll(selectedToppings);
         ArrayList<Topping> additionalToppings = allToppings;
@@ -84,7 +86,6 @@ public class RuPizzaCustomizeController implements Initializable {
         selectedToppingsListView.setItems(FXCollections.observableList(selectedToppingsList));
         ObservableList<Topping> additionalToppingsList = FXCollections.observableArrayList(additionalToppings);
         additionalToppingsListView.setItems(FXCollections.observableList(additionalToppingsList));
-
 
         //comboBox
         ObservableList<Size> options =  FXCollections.observableList(Arrays.asList(Size.values()));
@@ -204,8 +205,13 @@ public class RuPizzaCustomizeController implements Initializable {
         {
             if(selectedToppingsListView.getItems().size() < Pizza.MAX_TOPPINGS)
             {
-                selectedToppingsListView.getItems().add(additionalToppingsListView.getSelectionModel().getSelectedItem());
-                additionalToppingsListView.getItems().remove(additionalToppingsListView.getSelectionModel().getSelectedItem());
+                Topping topping = additionalToppingsListView.getSelectionModel().getSelectedItem();
+                //System.out.println("Yo" + additionalToppingsListView.getSelectionModel().getSelectedItem());
+                selectedToppingsListView.getItems().add(topping);
+                additionalToppingsListView.getItems().remove(topping);
+                this.pizza.addTopping(topping);
+
+
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR WITH TOPPINGS");
