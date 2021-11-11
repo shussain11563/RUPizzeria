@@ -10,6 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -100,10 +102,6 @@ public class RuPizzaCustomizeController implements Initializable {
     //use obejct
     public void setAdditionalPizzaToppings(String text) {
 
-        if(text.equals("Deluxe Pizza"))
-        {
-            List<String> values = Arrays.asList("Pineapple", "Pepperoni",  "Ham", "Mushroom", "Chicken", "Beef",
-
         if(text.equals("Deluxe Pizza")) {
             ObservableList<String> items = FXCollections.observableArrayList("Pineapple", "Pepperoni",  "Ham", "Mushroom", "Chicken", "Beef",
 
@@ -128,7 +126,7 @@ public class RuPizzaCustomizeController implements Initializable {
 
     @FXML
     void addOrder(ActionEvent event) {
-
+        return;
     }
 
     @FXML
