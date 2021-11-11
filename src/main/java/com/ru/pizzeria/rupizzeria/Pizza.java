@@ -24,10 +24,13 @@ public abstract class Pizza
             return false;
         }
 
+        /*
         if(MAX_TOPPINGS == this.toppings.size())
         {
             return false;
         }
+
+         */
 
         this.toppings.add(topping);
         return true;
