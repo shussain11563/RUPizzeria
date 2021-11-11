@@ -38,16 +38,14 @@ public class Deluxe extends Pizza {
 
         double sizeCost = calculateSizeOfPizza();
 
-
         runningCost += sizeCost;
-
 
 
         for(int i = this.MIN_TOPPING; i < toppings.size(); i++)
         {
             runningCost += Pizza.ADDITIONAL_TOPPINGS_COST;
         }
-
+        price = runningCost;
         return runningCost;
     }
 
