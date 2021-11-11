@@ -116,54 +116,9 @@ public class RuPizzaCustomizeController implements Initializable {
         pizzaButton.setText(text);
     }
 
-    public void setOrignalPizzaToppings(String text)
-    {
-        /*
-        if(text.equals("Deluxe Pizza")) {
-            ObservableList<String> items = FXCollections.observableArrayList("Sausage", "Onion", "Green Pepper", "Black Olives", "Diced Tomatoes");
-            selectedToppingsListView.setItems(FXCollections.observableList(items));
-        }
-        else if(text.equals("Hawaiian Pizza")) {
-            ObservableList<String> items = FXCollections.observableArrayList("Pineapple", "Ham");
-            selectedToppingsListView.setItems(FXCollections.observableList(items));
-        }
-        else if(text.equals("Pepperoni Pizza")) {
-            ObservableList<String> items = FXCollections.observableArrayList("Pepperoni");
-            selectedToppingsListView.setItems(FXCollections.observableList(items));
-        }
 
-         */
-    }
 
-    //use obejct
-    public void setAdditionalPizzaToppings(String text)
-    {
-        /*
 
-        if(text.equals("Deluxe Pizza"))
-        {
-            ObservableList<String> items = FXCollections.observableArrayList("Pineapple", "Pepperoni",  "Ham", "Mushroom", "Chicken", "Beef",
-
-                    "Salami", "Spinach");
-            additionalToppingsListView.getItems().clear();
-            additionalToppingsListView.setItems(FXCollections.observableList(items));
-        }
-        else if(text.equals("Hawaiian Pizza")) {
-            ObservableList<String> items = FXCollections.observableArrayList("Pepperoni", "Mushroom", "Onion", "Sausage", "Chicken", "Beef",
-                    "Salami", "Spinach", "Black Olives", "Green Pepper", "Diced Tomatoes");
-            additionalToppingsListView.getItems().clear();
-
-            additionalToppingsListView.setItems(FXCollections.observableList(items));
-        }
-        else if(text.equals("Pepperoni Pizza")) {
-            ObservableList<String> items = FXCollections.observableArrayList("Pineapple", "Ham", "Mushroom", "Onion", "Sausage", "Chicken", "Beef",
-                    "Salami", "Spinach", "Black Olives", "Green Pepper", "Diced Tomatoes");
-            additionalToppingsListView.getItems().clear();
-            additionalToppingsListView.setItems(FXCollections.observableList(items));
-        }
-
-         */
-    }
 
     @FXML
     void addOrder(ActionEvent event) {
