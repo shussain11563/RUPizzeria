@@ -46,6 +46,11 @@ public abstract class Pizza
         return false;
     }
 
+    public void setSize(Size size)
+    {
+        this.size = size;
+    }
+
     public double calculateSalesTax()
     {
         return 0;
@@ -61,16 +66,22 @@ public abstract class Pizza
     {
         double sizeCost = 0;
 
+
         //make this a whole method??
         switch (this.size)
         {
             case Small:
                 sizeCost = 0;
+                break;
             case Medium:
                 sizeCost += SIZE_INCREASE_COST;
+                break;
             case Large:
                 sizeCost += (SIZE_INCREASE_COST + SIZE_INCREASE_COST);
+                break;
         }
+
+
 
         return sizeCost;
     }

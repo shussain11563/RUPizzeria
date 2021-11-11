@@ -120,7 +120,7 @@ public class RuPizzeriaController implements Initializable {
                 RuPizzaCustomizeController setController = fxmlLoader.getController();
                 setController.setPizzaText(hawaiianPizzaButton.getText());
                 setController.setPizzaPicture(hawaiianPizzaButton.getText());
-                ;
+
 
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root, 900, 700));
