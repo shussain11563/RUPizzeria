@@ -27,8 +27,10 @@ public class Order
 
     public void printAllOrders() {
         for(int i = 0; i < pizzas.size(); i++) {
-            System.out.println(pizzas.get(i));
+            System.out.print(i + ": ");
+            System.out.print(pizzas.get(i).price + " ");
         }
+        System.out.println();
     }
 
 }

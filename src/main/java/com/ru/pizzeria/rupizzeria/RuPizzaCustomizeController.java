@@ -22,6 +22,8 @@ public class RuPizzaCustomizeController implements Initializable {
 
     pr
      */
+    private ArrayList<Topping> selectedToppings;
+    private ArrayList<Topping> additionalToppings;
     private Order newOrder;
 
     private String phoneNumber;
@@ -73,6 +75,7 @@ public class RuPizzaCustomizeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+
         newOrder = new Order(phoneNumber);
         //mainController.printHello();
 
@@ -94,17 +97,8 @@ public class RuPizzaCustomizeController implements Initializable {
         setPrice();
 
         //listview
-        ArrayList<Topping> selectedToppings = this.pizza.getToppings();
-        ArrayList<Topping> allToppings = new ArrayList<Topping>(Arrays.asList(Topping.values()));
-        allToppings.removeAll(selectedToppings);
-        ArrayList<Topping> additionalToppings = allToppings;
-        System.out.println(allToppings); //gives you an arraylist of the nonselected toppings
+        updateListView();
 
-
-        ObservableList<Topping> selectedToppingsList = FXCollections.observableArrayList(selectedToppings);
-        selectedToppingsListView.setItems(FXCollections.observableList(selectedToppingsList));
-        ObservableList<Topping> additionalToppingsList = FXCollections.observableArrayList(additionalToppings);
-        additionalToppingsListView.setItems(FXCollections.observableList(additionalToppingsList));
 
 
         //comboBox
@@ -144,9 +138,24 @@ public class RuPizzaCustomizeController implements Initializable {
     void addOrder(ActionEvent event) {
         newOrder.addPizza(pizza);
         newOrder.printAllOrders();
+        pizza = PizzaMaker.createPizza(pizzaButton.getText());
+        setPrice();
+        updateListView();
+
     }
 
+    public void updateListView() {
+        selectedToppings = this.pizza.getToppings();
+        ArrayList<Topping> allToppings = new ArrayList<Topping>(Arrays.asList(Topping.values()));
+        allToppings.removeAll(selectedToppings);
+        additionalToppings = allToppings;
+        //System.out.println(allToppings); //gives you an arraylist of the nonselected toppings
 
+        ObservableList<Topping> selectedToppingsList = FXCollections.observableArrayList(selectedToppings);
+        selectedToppingsListView.setItems(FXCollections.observableList(selectedToppingsList));
+        ObservableList<Topping> additionalToppingsList = FXCollections.observableArrayList(additionalToppings);
+        additionalToppingsListView.setItems(FXCollections.observableList(additionalToppingsList));
+    }
     @FXML
     void removeToppings(ActionEvent event)
     {
@@ -161,8 +170,7 @@ public class RuPizzaCustomizeController implements Initializable {
                 }
 
             }
-            else if(selectedToppingsListView.getItems().size() <= 0)
-            {
+            else if(selectedToppingsListView.getItems().size() <= 0) {
                showConfirmationNoToppingsOnPizza();
             }
         }
@@ -208,7 +216,6 @@ public class RuPizzaCustomizeController implements Initializable {
                 additionalToppingsListView.getItems().remove(topping);
                 this.pizza.addTopping(topping);
                 setPrice();
-
 
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
