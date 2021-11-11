@@ -87,8 +87,6 @@ public class RuPizzeriaController implements Initializable {
                 RuPizzaCustomizeController setController = fxmlLoader.getController();
                 setController.setPizzaText(deluxePizzaButton.getText());
                 setController.setPizzaPicture(deluxePizzaButton.getText());
-                setController.setOrignalPizzaToppings(deluxePizzaButton.getText());
-                setController.setAdditionalPizzaToppings(deluxePizzaButton.getText());
                 //openPizzaWindow(); //remove this
 
                 //remove this
@@ -122,8 +120,7 @@ public class RuPizzeriaController implements Initializable {
                 RuPizzaCustomizeController setController = fxmlLoader.getController();
                 setController.setPizzaText(hawaiianPizzaButton.getText());
                 setController.setPizzaPicture(hawaiianPizzaButton.getText());
-                setController.setOrignalPizzaToppings(hawaiianPizzaButton.getText());
-                setController.setAdditionalPizzaToppings(hawaiianPizzaButton.getText());
+                ;
 
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root, 900, 700));
@@ -155,8 +152,6 @@ public class RuPizzeriaController implements Initializable {
                 RuPizzaCustomizeController setController = fxmlLoader.getController();
                 setController.setPizzaText(pepperoniPizzaButton.getText());
                 setController.setPizzaPicture(pepperoniPizzaButton.getText());
-                setController.setOrignalPizzaToppings(pepperoniPizzaButton.getText());
-                setController.setAdditionalPizzaToppings(pepperoniPizzaButton.getText());
 
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root, 900, 700));
