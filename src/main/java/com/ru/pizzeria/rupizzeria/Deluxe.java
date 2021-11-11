@@ -15,6 +15,7 @@ public class Deluxe extends Pizza {
         this.toppings.add(Topping.GreenPepper);
         this.toppings.add(Topping.BlackOlives);
         this.toppings.add(Topping.DicedTomatoes);
+        this.size = Size.Small;
     }
 
     public void test()
@@ -37,7 +38,10 @@ public class Deluxe extends Pizza {
 
         double sizeCost = calculateSizeOfPizza();
 
+
         runningCost += sizeCost;
+
+
 
         for(int i = this.MIN_TOPPING; i < toppings.size(); i++)
         {
@@ -50,6 +54,6 @@ public class Deluxe extends Pizza {
     public static void main(String[] arg)
     {
         Deluxe pizza = new Deluxe();
-        pizza.test();
+        System.out.println(pizza.price());
     }
 }

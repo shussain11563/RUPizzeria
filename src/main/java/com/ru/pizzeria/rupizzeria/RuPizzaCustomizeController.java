@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class RuPizzaCustomizeController implements Initializable {
@@ -52,9 +53,18 @@ public class RuPizzaCustomizeController implements Initializable {
 
     @FXML
     void selectPizzaSize(ActionEvent event) {
-        Size selectedItem = myComboBox.getSelectionModel().getSelectedItem();
+        Size selectedSize = myComboBox.getSelectionModel().getSelectedItem();
+        pizza.setSize(selectedSize);
 
-        //System.out.println(selectedItem);
+        setPrice();
+
+    }
+
+    private void setPrice()
+    {
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        priceTextArea.setText(df.format(pizza.price()));
+        priceTextArea.setEditable(false);
     }
 
     @Override
@@ -77,6 +87,8 @@ public class RuPizzaCustomizeController implements Initializable {
         {
             System.out.println("Line 76");
         }
+
+        setPrice();
 
         //listview
         ArrayList<Topping> selectedToppings = this.pizza.getToppings();
@@ -135,6 +147,7 @@ public class RuPizzaCustomizeController implements Initializable {
                 additionalToppingsListView.getItems().add(topping);
                 selectedToppingsListView.getItems().remove(topping);
                 this.pizza.removeTopping(topping);
+                setPrice();
             }
             else if(selectedToppingsListView.getItems().size() <= 0)
             {
@@ -199,6 +212,7 @@ public class RuPizzaCustomizeController implements Initializable {
                 selectedToppingsListView.getItems().add(topping);
                 additionalToppingsListView.getItems().remove(topping);
                 this.pizza.addTopping(topping);
+                setPrice();
 
 
             } else {
