@@ -13,8 +13,18 @@ public class Hawaiian extends Pizza
     @Override
     public double price()
     {
+        double runningCost = 0;
+        runningCost += MIN_COST;
 
+        double sizeCost = calculateSizeOfPizza();
 
-        return 0;
+        runningCost += sizeCost;
+
+        for(int i = this.MIN_TOPPING; i < toppings.size(); i++)
+        {
+            runningCost += Pizza.ADDITIONAL_TOPPINGS_COST;
+        }
+
+        return runningCost;
     }
 }

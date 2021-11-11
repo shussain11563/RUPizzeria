@@ -50,6 +50,24 @@ public abstract class Pizza
 
     }
 
+
+    public double calculateSizeOfPizza()
+    {
+        double sizeCost = 0;
+
+        //make this a whole method??
+        switch (this.size)
+        {
+            case Small:
+                sizeCost = 0;
+            case Medium:
+                sizeCost += SIZE_INCREASE_COST;
+            case Large:
+                sizeCost += (SIZE_INCREASE_COST + SIZE_INCREASE_COST);
+        }
+
+        return sizeCost;
+    }
     //add Toppings
     //remove toppings
 

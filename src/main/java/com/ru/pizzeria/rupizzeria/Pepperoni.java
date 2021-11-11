@@ -20,17 +20,7 @@ public class Pepperoni extends Pizza
         double runningCost = 0;
         runningCost += MIN_COST;
 
-        double sizeCost = 0;
-
-        switch (this.size)
-        {
-            case small:
-                sizeCost = 0;
-            case medium:
-                sizeCost += SIZE_INCREASE_COST;
-            case large:
-                sizeCost += (SIZE_INCREASE_COST + SIZE_INCREASE_COST);
-        }
+        double sizeCost = calculateSizeOfPizza();
 
         runningCost += sizeCost;
 
