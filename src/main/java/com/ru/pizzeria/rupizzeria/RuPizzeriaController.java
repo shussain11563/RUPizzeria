@@ -60,7 +60,7 @@ public class RuPizzeriaController {
                 setController.setPizzaText(deluxePizzaButton.getText());
                 setController.setPizzaPicture(deluxePizzaButton.getText());
                 setController.setOrignalPizzaToppings(deluxePizzaButton.getText());
-                setController.setAdditionalPizzaToppings(hawaiianPizzaButton.getText());
+                setController.setAdditionalPizzaToppings(deluxePizzaButton.getText());
 
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root, 900, 700));
@@ -124,7 +124,7 @@ public class RuPizzeriaController {
                 setController.setPizzaText(pepperoniPizzaButton.getText());
                 setController.setPizzaPicture(pepperoniPizzaButton.getText());
                 setController.setOrignalPizzaToppings(pepperoniPizzaButton.getText());
-                setController.setAdditionalPizzaToppings(hawaiianPizzaButton.getText());
+                setController.setAdditionalPizzaToppings(pepperoniPizzaButton.getText());
 
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root, 900, 700));
