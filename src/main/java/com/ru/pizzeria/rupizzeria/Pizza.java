@@ -50,6 +50,9 @@ public abstract class Pizza
 
     }
 
+    public ArrayList<Topping> getToppings() {
+        return toppings;
+    }
 
     public double calculateSizeOfPizza()
     {
