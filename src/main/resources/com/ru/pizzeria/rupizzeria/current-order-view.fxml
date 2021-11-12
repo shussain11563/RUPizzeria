@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.pizzeria.rupizzeria.RuPizzeriaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.pizzeria.rupizzeria.RuPizzaCurrentOrderViewController">
    <children>
       <Label layoutX="357.0" layoutY="14.0" prefHeight="30.0" prefWidth="187.0" text="Current Pizza Order">
          <font>
@@ -32,13 +31,13 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextArea layoutX="647.0" layoutY="549.0" prefHeight="25.0" prefWidth="160.0" />
-      <Button layoutX="497.0" layoutY="613.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="315.0" text="Place Order">
+      <TextArea fx:id="orderTotalTextArea" layoutX="647.0" layoutY="549.0" prefHeight="25.0" prefWidth="160.0" />
+      <Button fx:id="placeOrderButton" layoutX="497.0" layoutY="613.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="315.0" text="Place Order">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <TextArea layoutX="210.0" layoutY="58.0" prefHeight="38.0" prefWidth="221.0" />
+      <TextArea fx:id="customerPhoneNumber" layoutX="210.0" layoutY="58.0" prefHeight="38.0" prefWidth="221.0" />
       <Label layoutX="497.0" layoutY="502.0" prefHeight="30.0" prefWidth="99.0" text="Sales Tax:">
          <font>
             <Font name="System Bold" size="20.0" />
@@ -49,10 +48,10 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextArea layoutX="647.0" layoutY="498.0" prefHeight="25.0" prefWidth="160.0" />
-      <TextArea layoutX="645.0" layoutY="447.0" prefHeight="25.0" prefWidth="160.0" />
-      <ListView layoutX="47.0" layoutY="155.0" prefHeight="519.0" prefWidth="430.0" />
-      <Button layoutX="490.0" layoutY="155.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="315.0" text="Remove Selected Pizza">
+      <TextArea fx:id="salesTaxTextArea" layoutX="647.0" layoutY="498.0" prefHeight="25.0" prefWidth="160.0" />
+      <TextArea fx:id="subtotalTextArea" layoutX="645.0" layoutY="447.0" prefHeight="25.0" prefWidth="160.0" />
+      <ListView fx:id="orderListView" layoutX="47.0" layoutY="155.0" prefHeight="519.0" prefWidth="430.0" />
+      <Button fx:id="removeSelectedPizzaButton" layoutX="490.0" layoutY="155.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="315.0" text="Remove Selected Pizza">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

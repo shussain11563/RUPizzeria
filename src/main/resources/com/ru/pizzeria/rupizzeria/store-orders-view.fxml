@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.pizzeria.rupizzeria.RuPizzeriaController">
    <children>
       <Label layoutX="391.0" layoutY="14.0" text="Store Orders">
@@ -28,18 +27,18 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextArea layoutX="674.0" layoutY="103.0" prefHeight="37.0" prefWidth="205.0" />
-      <Button layoutX="538.0" layoutY="163.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="342.0" text="Cancel Order">
+      <TextArea fx:id="orderTotalTextArea" layoutX="674.0" layoutY="103.0" prefHeight="37.0" prefWidth="205.0" />
+      <Button fx:id="cancelOrderButton" layoutX="538.0" layoutY="163.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="342.0" text="Cancel Order">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="538.0" layoutY="234.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="342.0" text="Export Store Orders">
+      <Button fx:id="exportStoreOrdersButton" layoutX="538.0" layoutY="234.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="342.0" text="Export Store Orders">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <ListView layoutX="47.0" layoutY="105.0" prefHeight="576.0" prefWidth="465.0" />
-      <ComboBox layoutX="308.0" layoutY="65.0" prefHeight="25.0" prefWidth="205.0" />
+      <ListView fx:id="storeOrderListView" layoutX="47.0" layoutY="105.0" prefHeight="576.0" prefWidth="465.0" />
+      <ComboBox fx:id="customerPhoneNumberComboBox" layoutX="308.0" layoutY="65.0" prefHeight="25.0" prefWidth="205.0" />
    </children>
 </AnchorPane>
