@@ -8,9 +8,9 @@ public abstract class Pizza
     static final int MAX_TOPPINGS = 7;
     static final double SIZE_INCREASE_COST = 2;
     static final double ADDITIONAL_TOPPINGS_COST = 1.49;
+    double price;
 
     //MAX TOPPINGS
-
     //static final MAX_TOPPINGS = 7;
     //static final
     protected ArrayList<Topping> toppings = new ArrayList<Topping>();
@@ -21,6 +21,8 @@ public abstract class Pizza
     {
         if(this.toppings.contains(topping))
         {
+            printAllToppings();
+
             return false;
         }
 
@@ -40,9 +42,12 @@ public abstract class Pizza
     {
         if(this.toppings.contains(topping))
         {
+
             this.toppings.remove(topping);
+
             return true;
         }
+
         return false;
     }
 
@@ -55,6 +60,14 @@ public abstract class Pizza
     {
         return 0;
         //r
+
+    }
+
+    public void printAllToppings() {
+        for(int i = 0; i < toppings.size(); i++) {
+            System.out.print(toppings.get(i));
+        }
+        System.out.println();
 
     }
 

@@ -86,9 +86,14 @@ public class RuPizzeriaController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pizza-customize-view.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 RuPizzaCustomizeController setController = fxmlLoader.getController();
+
                 setController.setPizzaText(pizzaText);
                 setController.setPizzaPicture(pizzaImage);
-                setController.safeInitialize();  //safe initalizerTest
+         
+
+                setController.setPizzaPhoneNumber(customerPhoneNumber.getText());
+                setController.safeInitialize(); //safe initalizerTest
+
 
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root, 900, 700));
