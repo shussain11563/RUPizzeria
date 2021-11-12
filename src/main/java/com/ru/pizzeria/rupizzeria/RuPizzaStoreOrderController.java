@@ -1,5 +1,7 @@
 package com.ru.pizzeria.rupizzeria;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -38,6 +41,7 @@ public class RuPizzaStoreOrderController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        //private ListView<Pizza> orderListView;
 
         //subtotal
         //sales tax
@@ -50,6 +54,13 @@ public class RuPizzaStoreOrderController implements Initializable {
 
     }
 
+    public void initTest()
+    {
+        //ArrayList<Pizza> pizzasInOrder =
+        //ObservableList<Pizza> pizzas = FXCollections
+
+    }
+
     //when add to order
     private void clear()
     {
@@ -59,6 +70,8 @@ public class RuPizzaStoreOrderController implements Initializable {
         this.orderTotalTextArea.clear();
         this.customerPhoneNumber.clear();
     }
+
+
 
 
 

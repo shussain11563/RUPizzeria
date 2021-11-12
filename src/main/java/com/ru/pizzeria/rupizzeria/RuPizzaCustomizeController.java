@@ -159,14 +159,15 @@ public class RuPizzaCustomizeController implements Initializable {
     void addOrder(ActionEvent event) {
         newOrder.addPizza(pizza);
 
-        newOrder.printAllOrders();
+        //newOrder.printAllOrders();
         pizza = PizzaMaker.createPizza(pizzaButton.getText());
         setPrice();
         updateListView();
 
     }
 
-    public void updateListView() {
+    public void updateListView()
+    {
         selectedToppings = this.pizza.getToppings();
         ArrayList<Topping> allToppings = new ArrayList<Topping>(Arrays.asList(Topping.values()));
         allToppings.removeAll(selectedToppings);
