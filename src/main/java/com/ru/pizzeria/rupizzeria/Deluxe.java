@@ -18,18 +18,6 @@ public class Deluxe extends Pizza {
         this.size = Size.Small;
     }
 
-    public void test()
-    {
-        ArrayList<Topping> toppingsSelected = this.toppings;
-        ArrayList<Topping> allToppings = new ArrayList<Topping>(Arrays.asList(Topping.values()));
-
-        allToppings.removeAll(toppingsSelected);
-        System.out.println(allToppings); //gives you an arraylist of the nonselected toppings
-
-        //we get an arraylist
-
-    }
-
     @Override
     public double price()
     {
@@ -49,9 +37,5 @@ public class Deluxe extends Pizza {
         return runningCost;
     }
 
-    public static void main(String[] arg)
-    {
-        Deluxe pizza = new Deluxe();
-        System.out.println(pizza.price());
-    }
+
 }
