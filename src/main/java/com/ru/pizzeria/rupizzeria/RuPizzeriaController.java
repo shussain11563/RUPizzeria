@@ -131,18 +131,22 @@ public class RuPizzeriaController implements Initializable {
         alert.showAndWait();
     }
 
-    private boolean checkPhoneNumber(String text) {
-        try {
-            double phoneNumber = Double.parseDouble(text);
-            if(text.length() != 10)
-                return false;
-            return true;
-
-        }catch(NumberFormatException e){
+    private static boolean checkPhoneNumber(String text)
+    {
+        if(text.length() != 10)
             return false;
+
+        //make the 10 a static final constant
+        for(int i = 0; i < text.length(); i++)
+        {
+            if(!Character.isDigit(text.charAt(i)))
+            {
+                return false;
+            }
         }
+
+        return true;
+
     }
-
-
 
 }
