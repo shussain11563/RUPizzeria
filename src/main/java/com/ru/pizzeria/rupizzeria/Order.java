@@ -25,12 +25,25 @@ public class Order
         this.pizzas.remove(pizza);
     }
 
+    /*
     public void printAllOrders() {
         for(int i = 0; i < pizzas.size(); i++) {
             System.out.print(i + ": ");
             System.out.print(pizzas.get(i).price + " ");
         }
-        System.out.println();
+    }*/
+
+    @Override
+    public String toString()
+    {
+        String pizzas = "";
+        for(int i = 0; i < this.pizzas.size(); i++)
+        {
+            pizzas += this.pizzas.get(i).toString() + "\n";
+
+        }
+
+        return pizzas;
     }
 
 }

@@ -20,7 +20,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
          <graphic>
-            <ImageView fitHeight="140.0" fitWidth="159.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="deluxeImage" fitHeight="140.0" fitWidth="159.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../pictures/deluxePizza.jpg" />
                </image>
@@ -32,7 +32,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
          <graphic>
-            <ImageView fitHeight="284.0" fitWidth="216.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="hawaiianImage" fitHeight="284.0" fitWidth="216.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../pictures/hawaiianPizza.jpg" />
                </image>
@@ -44,7 +44,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
          <graphic>
-            <ImageView fitHeight="187.0" fitWidth="187.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="pepperoniImage" fitHeight="187.0" fitWidth="187.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../pictures/pepPizza.jpg" />
                </image>

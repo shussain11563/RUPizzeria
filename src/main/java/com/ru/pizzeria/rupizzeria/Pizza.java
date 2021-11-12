@@ -1,5 +1,6 @@
 package com.ru.pizzeria.rupizzeria;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public abstract class Pizza
@@ -97,6 +98,22 @@ public abstract class Pizza
 
 
         return sizeCost;
+    }
+
+    @Override
+    public String toString()
+    {
+        String pizzaType = this.getClass().getSimpleName() + " Pizza";
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+
+        String toppings = "";
+
+        for(int i = 0; i < this.toppings.size(); i++)
+        {
+            toppings = this.toppings.get(i) + ", ";
+        }
+        return String.format("%s, %s$%s", pizzaType, toppings, df.format(this.price()));
+
     }
     //add Toppings
     //remove toppings

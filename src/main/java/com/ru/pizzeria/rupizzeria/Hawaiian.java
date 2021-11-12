@@ -9,6 +9,7 @@ public class Hawaiian extends Pizza
     {
         this.toppings.add(Topping.Pineapple);
         this.toppings.add(Topping.Ham);
+        this.size = Size.Small;
     }
     @Override
     public double price()

@@ -77,16 +77,14 @@ public class RuPizzaCustomizeController implements Initializable {
     {
 
         newOrder = new Order(phoneNumber);
-        //mainController.printHello();
 
 
         //CcomboBox
         //System.out.println(mainController.deluxePizzaButton.getText()); //BUG, ONLY PRINTS DELUXE PIZZA
 
-        //create pizza
+        /*
+       //create pizza
         String pizzaFlavor = pizzaButton.getText();
-        System.out.println(pizzaFlavor);
-        //String pizzaFlavor = ""; //add to order
         Pizza pizza = PizzaMaker.createPizza(pizzaFlavor); //null
         this.pizza = pizza;
         if(this.pizza == null)
@@ -94,10 +92,7 @@ public class RuPizzaCustomizeController implements Initializable {
             System.out.println("Line 76");
         }
 
-        setPrice();
-
-        //listview
-        updateListView();
+        */
 
 
 
@@ -105,10 +100,55 @@ public class RuPizzaCustomizeController implements Initializable {
         ObservableList<Size> options =  FXCollections.observableList(Arrays.asList(Size.values()));
         myComboBox.setItems(options);
         myComboBox.setValue(Size.Small); //default value
+
+        /*
+
+        //listview
+        ArrayList<Topping> selectedToppings = this.pizza.getToppings();
+        ArrayList<Topping> allToppings = new ArrayList<Topping>(Arrays.asList(Topping.values()));
+        allToppings.removeAll(selectedToppings);
+        ArrayList<Topping> additionalToppings = allToppings;
+        System.out.println(allToppings); //gives you an arraylist of the nonselected toppings
+        ObservableList<Topping> selectedToppingsList = FXCollections.observableArrayList(selectedToppings);
+        selectedToppingsListView.setItems(FXCollections.observableList(selectedToppingsList));
+        ObservableList<Topping> additionalToppingsList = FXCollections.observableArrayList(additionalToppings);
+        additionalToppingsListView.setItems(FXCollections.observableList(additionalToppingsList));
+
+        //displays default price
+        setPrice();
+
+         */
+
     }
 
-    public void setPizzaPicture(String text) {
-        if(text.equals("Deluxe Pizza")) {
+
+    public void safeInitialize()
+    {
+        String pizzaFlavor = pizzaButton.getText();
+        Pizza pizza = PizzaMaker.createPizza(pizzaFlavor); //null
+        this.pizza = pizza;
+
+        //listview
+        updateListView();
+
+
+        ObservableList<Topping> selectedToppingsList = FXCollections.observableArrayList(selectedToppings);
+        selectedToppingsListView.setItems(FXCollections.observableList(selectedToppingsList));
+        ObservableList<Topping> additionalToppingsList = FXCollections.observableArrayList(additionalToppings);
+        additionalToppingsListView.setItems(FXCollections.observableList(additionalToppingsList));
+
+        //displays default price
+        setPrice();
+
+    }
+
+    public void setPizzaPicture(Image image)
+    {
+        this.pizzaImage.setImage(image);
+        //TESTING
+
+        /*
+        if(text.equals("Deluxe Pizzaswndsndsandon")) {
             String path = "file:resources/deluxePizza.jpg";
             Image image = new Image(path);
             pizzaImage.setImage(image);
@@ -124,6 +164,8 @@ public class RuPizzaCustomizeController implements Initializable {
             Image image = new Image(path);
             pizzaImage.setImage(image);
         }
+
+         */
     }
 
     public void setPizzaText(String text) {

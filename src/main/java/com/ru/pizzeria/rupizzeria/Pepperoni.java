@@ -10,7 +10,7 @@ public class Pepperoni extends Pizza
     public Pepperoni()
     {
         toppings.add(Topping.Pepperoni);
-        //this.size =
+        this.size = Size.Small;
 
     }
     @Override
@@ -34,4 +34,5 @@ public class Pepperoni extends Pizza
 
         // add sales tax
     }
+
 }

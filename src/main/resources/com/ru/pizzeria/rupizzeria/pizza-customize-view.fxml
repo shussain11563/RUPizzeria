@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -17,11 +16,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
          <graphic>
-            <ImageView fx:id="pizzaImage" fitHeight="140.0" fitWidth="159.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../../../JavaFXTuition/src/main/resources/com/pics/deluxePizza.jpg" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="pizzaImage" fitHeight="140.0" fitWidth="159.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
       <Label layoutX="24.0" layoutY="14.0" text="Chosen Pizza">
