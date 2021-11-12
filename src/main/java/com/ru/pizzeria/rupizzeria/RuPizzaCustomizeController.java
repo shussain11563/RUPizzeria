@@ -22,6 +22,9 @@ public class RuPizzaCustomizeController implements Initializable {
 
     pr
      */
+    private Order newOrder;
+
+    private String phoneNumber;
 
     private RuPizzeriaController mainController;
 
@@ -71,8 +74,7 @@ public class RuPizzaCustomizeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources)
     {
 
-        //String test =  mainController.getHawaiianPizzaButton().getText();
-        //System.out.println(test);
+        newOrder = new Order(phoneNumber);
 
 
         //CcomboBox
@@ -130,6 +132,8 @@ public class RuPizzaCustomizeController implements Initializable {
         allToppings.removeAll(selectedToppings);
         ArrayList<Topping> additionalToppings = allToppings;
         System.out.println(allToppings); //gives you an arraylist of the nonselected toppings
+
+
         ObservableList<Topping> selectedToppingsList = FXCollections.observableArrayList(selectedToppings);
         selectedToppingsListView.setItems(FXCollections.observableList(selectedToppingsList));
         ObservableList<Topping> additionalToppingsList = FXCollections.observableArrayList(additionalToppings);
@@ -137,7 +141,6 @@ public class RuPizzaCustomizeController implements Initializable {
 
         //displays default price
         setPrice();
-
 
     }
 
@@ -171,11 +174,16 @@ public class RuPizzaCustomizeController implements Initializable {
         pizzaButton.setText(text);
     }
 
+    public void setPizzaPhoneNumber(String text) {
+        phoneNumber = text;
+    }
 
     @FXML
     void addOrder(ActionEvent event) {
-        return;
+        newOrder.addPizza(pizza);
+        newOrder.printAllOrders();
     }
+
 
     @FXML
     void removeToppings(ActionEvent event)
@@ -184,64 +192,48 @@ public class RuPizzaCustomizeController implements Initializable {
         {
             if(selectedToppingsListView.getItems().size() > 0)
             {
-                Topping topping = selectedToppingsListView.getSelectionModel().getSelectedItem();
-                additionalToppingsListView.getItems().add(topping);
-                selectedToppingsListView.getItems().remove(topping);
-                this.pizza.removeTopping(topping);
-                setPrice();
+                if(checkDeluxeToppings(selectedToppingsListView.getSelectionModel().getSelectedItem())) {
+                    showConfirmationRemoveEssentialToppings();
+                }else {
+                    callRemoveToppings();
+                }
+
             }
             else if(selectedToppingsListView.getItems().size() <= 0)
             {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Warning with Removing Toppings");
-                alert.setHeaderText("Removing Toppings");
-                alert.setContentText("No Toppings on Pizza");
-                Optional<ButtonType> result = alert.showAndWait();
-            }
-            else //this does not run, must change
-            {
-                //fix the
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Warning with Removing Toppings");
-                alert.setHeaderText("Removing Toppings");
-                alert.setContentText("You are removing essential toppings");
-                Optional<ButtonType> result = alert.showAndWait();
-
-                if(result.get() == ButtonType.OK) {
-                    additionalToppingsListView.getItems().add(selectedToppingsListView.getSelectionModel().getSelectedItem());
-                    selectedToppingsListView.getItems().remove(selectedToppingsListView.getSelectionModel().getSelectedItem());
-                }
-
-            }
-
-        }
-        /*{
-            if(pizzaButton.getText().equals("Deluxe Pizza")) {
-                if(checkDeluxeToppings(selectedToppingsListView.getSelectionModel().getSelectedItem()))
-                {
-                    additionalToppingsListView.getItems().add(selectedToppingsListView.getSelectionModel().getSelectedItem());
-                    selectedToppingsListView.getItems().remove(selectedToppingsListView.getSelectionModel().getSelectedItem());
-                }
-                else {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Warning with Removing Toppings");
-                    alert.setHeaderText("Removing Toppings");
-                    alert.setContentText("You are removing essential toppings");
-                    Optional<ButtonType> result = alert.showAndWait();
-
-                    if(result.get() == ButtonType.OK) {
-                        additionalToppingsListView.getItems().add(selectedToppingsListView.getSelectionModel().getSelectedItem());
-                        selectedToppingsListView.getItems().remove(selectedToppingsListView.getSelectionModel().getSelectedItem());
-                    }
-                }
+               showConfirmationNoToppingsOnPizza();
             }
         }
+    }
 
-        */
+    public void showConfirmationRemoveEssentialToppings() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Warning with Removing Toppings");
+        alert.setHeaderText("Removing Toppings");
+        alert.setContentText("You are removing essential toppings");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get() == ButtonType.OK) {
+            callRemoveToppings();
+        }
+    }
+
+    public void showConfirmationNoToppingsOnPizza() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Warning with Removing Toppings");
+        alert.setHeaderText("Removing Toppings");
+        alert.setContentText("No Toppings on Pizza");
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
+    public void callRemoveToppings() {
+        Topping topping = selectedToppingsListView.getSelectionModel().getSelectedItem();
+        additionalToppingsListView.getItems().add(topping);
+        selectedToppingsListView.getItems().remove(topping);
+        this.pizza.removeTopping(topping);
+        setPrice();
     }
 
     @FXML
-
     void addToppings(ActionEvent event)
     {
         if(additionalToppingsListView.getSelectionModel().getSelectedItem() != null)
@@ -266,14 +258,13 @@ public class RuPizzaCustomizeController implements Initializable {
 
         }
     }
-    public boolean checkDeluxeToppings(String selectedItem) {
-        if(selectedItem.equals("Sausage") || selectedItem.equals("Onion") || selectedItem.equals("Green Pepper")
-                || selectedItem.equals("Black Olives") || selectedItem.equals("Diced Tomatoes")) {
-
-
-            return false;
+    public boolean checkDeluxeToppings(Topping selectedItem) {
+        if(selectedItem.toString().equals("Sausage") || selectedItem.toString().equals("Onion")
+                || selectedItem.toString().equals("GreenPepper") || selectedItem.toString().equals("BlackOlives")
+                || selectedItem.toString().equals("DicedTomatoes")) {
+            return true;
         }
-        return true;
+        return false;
     }
 
 
