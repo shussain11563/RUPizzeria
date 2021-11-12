@@ -34,9 +34,5 @@ public class Pepperoni extends Pizza
 
         // add sales tax
     }
-    public static void main(String[] args)
-    {
-        Pepperoni p = new Pepperoni();
-        System.out.println(p.toString());
-    }
+
 }
