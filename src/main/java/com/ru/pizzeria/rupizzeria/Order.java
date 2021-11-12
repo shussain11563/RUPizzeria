@@ -15,6 +15,16 @@ public class Order
 
     }
 
+    public ArrayList<Pizza> getPizzas() {
+        return pizzas;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+
+    //use phonenumber
     public void addPizza(Pizza pizza)
     {
         this.pizzas.add(pizza);
@@ -25,13 +35,14 @@ public class Order
         this.pizzas.remove(pizza);
     }
 
+
     /*
     public void printAllOrders() {
         for(int i = 0; i < pizzas.size(); i++) {
             System.out.print(i + ": ");
             System.out.print(pizzas.get(i).price + " ");
         }
-    }*/
+    }
 
     @Override
     public String toString()
@@ -45,5 +56,7 @@ public class Order
 
         return pizzas;
     }
+
+     */
 
 }

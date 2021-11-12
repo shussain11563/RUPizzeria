@@ -24,6 +24,8 @@ public class StoreOrders
         this.orders.remove(order);
     }
 
+
+
     /*
     @Override
     public String toString()
@@ -41,19 +43,45 @@ public class StoreOrders
      */
 
     //not sure about signature
-    public void export(File file) throws FileNotFoundException {
+    public void export(File file) throws FileNotFoundException
+    {
+        //add try catch for for closing and file not found but idk because printwriter creates a new file, so may not be neccessary?s
         PrintWriter printWriter = new PrintWriter(file);
+        printWriter.println("----------- STORE ORDERS -----------\n");
 
         for(int i = 0; i < orders.size(); i++)
         {
-            //printWriter.println(orders.get(i).toString());
-            //printWriter.println(orders.get());
+            Order order = orders.get(i);
+            printWriter.println(String.format("ORDER NUMBER: %s", order.getPhoneNumber()));
+            //might just create a toString in order
+            ArrayList<Pizza> pizzasInOrder = order.getPizzas();
+            for(int j = 0; j < pizzasInOrder.size(); j++)
+            {
+                Pizza pizza = pizzasInOrder.get(j);
+                printWriter.println(String.format("- %s", pizza.toString()));
+            }
+            printWriter.print("\n");
+
         }
-        printWriter.println();
 
         printWriter.close();
 
     }
+
+
+    public Order find(String phoneNumber)
+    {
+        for(int i = 0; i < orders.size(); i++)
+        {
+            if(orders.get(i).getPhoneNumber().equals(phoneNumber))
+            {
+                return orders.get(i);
+            }
+        }
+
+        return null;
+    }
+
 
     //create toString for each
 
