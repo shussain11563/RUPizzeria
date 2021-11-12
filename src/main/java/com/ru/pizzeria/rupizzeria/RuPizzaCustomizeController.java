@@ -147,27 +147,6 @@ public class RuPizzaCustomizeController implements Initializable {
     public void setPizzaPicture(Image image)
     {
         this.pizzaImage.setImage(image);
-        //TESTING
-
-        /*
-        if(text.equals("Deluxe Pizzaswndsndsandon")) {
-            String path = "file:resources/deluxePizza.jpg";
-            Image image = new Image(path);
-            pizzaImage.setImage(image);
-        }
-        else if(text.equals("Hawaiian Pizza")) {
-            String path = "file:resources/hawaiianPizza.jpg";
-            Image image = new Image(path);
-            pizzaImage.setImage(image);
-
-        }
-        else if(text.equals("Pepperoni Pizza")) {
-            String path = "file:resources/pepPizza.jpg";
-            Image image = new Image(path);
-            pizzaImage.setImage(image);
-        }
-
-         */
     }
 
     public void setPizzaText(String text) {
@@ -181,7 +160,7 @@ public class RuPizzaCustomizeController implements Initializable {
     @FXML
     void addOrder(ActionEvent event) {
         newOrder.addPizza(pizza);
-        newOrder.printAllOrders();
+        newOrder.printAllOrders(); //remove idk?
     }
 
 

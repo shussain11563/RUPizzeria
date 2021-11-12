@@ -38,13 +38,16 @@ public class RuPizzeriaController implements Initializable {
     @FXML
     private ImageView pepperoniImage;
 
+    private StoreOrders storeOrders;
+
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
 
+        this.storeOrders = new StoreOrders();
         //pizzaImageViewTest.getImage();
         //Order orderTest = new Order("11111144444");
-        System.out.println("Hi");
+
         //order
         //initialize
 
