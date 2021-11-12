@@ -1,5 +1,8 @@
 package com.ru.pizzeria.rupizzeria;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class StoreOrders
@@ -8,22 +11,47 @@ public class StoreOrders
 
     public StoreOrders()
     {
-        orders = new ArrayList<Order>();
+        this.orders = new ArrayList<Order>();
     }
 
-    public static void addOrder(Order order)
+    public void addOrder(Order order)
     {
-
+        this.orders.add(order);
     }
 
-    public static void removeOrder(Order order)
+    public void removeOrder(Order order)
     {
-
+        this.orders.remove(order);
     }
+
+    /*
+    @Override
+    public String toString()
+    {
+        String  = "";
+        for(int i = 0; i < this.pizzas.size(); i++)
+        {
+            pizzas += this.pizzas.get(i).toString() + "\n";
+
+        }
+
+        return pizzas;
+    }
+
+     */
 
     //not sure about signature
-    public static void export()
-    {
+    public void export(File file) throws FileNotFoundException {
+        PrintWriter printWriter = new PrintWriter(file);
+
+        for(int i = 0; i < orders.size(); i++)
+        {
+            //printWriter.println(orders.get(i).toString());
+            //printWriter.println(orders.get());
+        }
+        printWriter.println();
+
+        printWriter.close();
 
     }
 
