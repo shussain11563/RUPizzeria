@@ -33,7 +33,7 @@ public class Deluxe extends Pizza {
         {
             runningCost += Pizza.ADDITIONAL_TOPPINGS_COST;
         }
-        price = runningCost;
+        this.price = runningCost;
         return runningCost;
     }
 
