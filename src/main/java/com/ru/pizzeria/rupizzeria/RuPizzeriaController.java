@@ -7,13 +7,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.function.ObjDoubleConsumer;
 
 public class RuPizzeriaController implements Initializable {
     @FXML
@@ -28,19 +29,27 @@ public class RuPizzeriaController implements Initializable {
     @FXML
     private TextField customerPhoneNumber;
 
+    @FXML
+    private ImageView deluxeImage;
+
+    @FXML
+    private ImageView hawaiianImage;
+
+    @FXML
+    private ImageView pepperoniImage;
+
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+
+        //pizzaImageViewTest.getImage();
         //Order orderTest = new Order("11111144444");
         System.out.println("Hi");
         //order
         //initialize
 
-    }
+        //getter
 
-    private void printHello()
-    {
-        System.out.println("Hi");
     }
 
     @FXML
@@ -63,17 +72,9 @@ public class RuPizzeriaController implements Initializable {
         stage.show();
     }
 
-    @FXML
-    void openPizzaWindow()
+
+    public void openPizzaCustomizationView(String pizzaText, Image pizzaImage) throws IOException
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("pizza-customize-view.fxml"));
-        RuPizzaCustomizeController pizzaView = loader.getController();
-
-        pizzaView.setMainController(this);
-    }
-
-    @FXML
-    void openDeluxeCustomizePizzaWindow(ActionEvent event) throws IOException {
         if(checkPhoneNumber(customerPhoneNumber.getText().trim())) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
@@ -81,89 +82,53 @@ public class RuPizzeriaController implements Initializable {
             alert.setContentText("Click to Continue with Order");
 
             Optional<ButtonType> result = alert.showAndWait();
-            if(result.get() == ButtonType.OK) {
+            if (result.get() == ButtonType.OK) {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pizza-customize-view.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 RuPizzaCustomizeController setController = fxmlLoader.getController();
-                setController.setPizzaText(deluxePizzaButton.getText());
-                setController.setPizzaPicture(deluxePizzaButton.getText());
-                //openPizzaWindow(); //remove this
-
-                //remove this
-                //setController.setMainController(this);
+                setController.setPizzaText(pizzaText);
+                setController.setPizzaPicture(pizzaImage);
+                setController.safeInitialize();  //safe initalizerTest
 
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root, 900, 700));
                 stage.setTitle("Store Orders");
                 stage.show();
+
             }
-        }else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error with Phone Number");
-            alert.setContentText("Phone Number Not Valid");
-            alert.showAndWait();
         }
-    }
-
-    @FXML
-    void openHawaiianCustomizePizzaWindow(ActionEvent event) throws IOException {
-        if(checkPhoneNumber(customerPhoneNumber.getText().trim())){
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation");
-            alert.setHeaderText("Pizza Order");
-            alert.setContentText("Click to Continue with Order");
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if(result.get() == ButtonType.OK) {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pizza-customize-view.fxml"));
-                Parent root = (Parent) fxmlLoader.load();
-                RuPizzaCustomizeController setController = fxmlLoader.getController();
-                setController.setPizzaText(hawaiianPizzaButton.getText());
-                setController.setPizzaPicture(hawaiianPizzaButton.getText());
-
-
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root, 900, 700));
-                stage.setTitle("Store Orders");
-                stage.show();
-            }
-
-        }else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error with Phone Number");
-            alert.setContentText("Phone Number Not Valid");
-            alert.showAndWait();
+        else
+        {
+            errorAlert();
         }
+
 
     }
 
     @FXML
-    void openPepperoniCustomizePizzaWindow(ActionEvent event) throws IOException {
-        if(checkPhoneNumber(customerPhoneNumber.getText().trim())) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation");
-            alert.setHeaderText("Pizza Order");
-            alert.setContentText("Click to Continue with Order");
+    void openDeluxeCustomizePizzaWindow(ActionEvent event) throws IOException
+    {
+        openPizzaCustomizationView("Deluxe Pizza", deluxeImage.getImage());
+    }
 
-            Optional<ButtonType> result = alert.showAndWait();
-            if(result.get() == ButtonType.OK) {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pizza-customize-view.fxml"));
-                Parent root = (Parent) fxmlLoader.load();
-                RuPizzaCustomizeController setController = fxmlLoader.getController();
-                setController.setPizzaText(pepperoniPizzaButton.getText());
-                setController.setPizzaPicture(pepperoniPizzaButton.getText());
+    @FXML
+    void openHawaiianCustomizePizzaWindow(ActionEvent event) throws IOException
+    {
+        openPizzaCustomizationView("Hawaiian Pizza", hawaiianImage.getImage());
+    }
 
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root, 900, 700));
-                stage.setTitle("Store Orders");
-                stage.show();
-            }
-        }else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error with Phone Number");
-            alert.setContentText("Phone Number Not Valid");
-            alert.showAndWait();
-        }
+    @FXML
+    void openPepperoniCustomizePizzaWindow(ActionEvent event) throws IOException
+    {
+        openPizzaCustomizationView("Pepperoni Pizza", pepperoniImage.getImage());
+    }
+
+    private void errorAlert()
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error with Phone Number");
+        alert.setContentText("Phone Number Not Valid");
+        alert.showAndWait();
     }
 
     private boolean checkPhoneNumber(String text) {
@@ -177,5 +142,7 @@ public class RuPizzeriaController implements Initializable {
             return false;
         }
     }
+
+
 
 }
