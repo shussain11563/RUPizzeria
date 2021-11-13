@@ -31,13 +31,13 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextArea fx:id="orderTotalTextArea" layoutX="647.0" layoutY="549.0" prefHeight="25.0" prefWidth="160.0" />
-      <Button fx:id="placeOrderButton" layoutX="497.0" layoutY="613.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="315.0" text="Place Order">
+      <TextArea fx:id="orderTotalTextArea" editable="false" layoutX="647.0" layoutY="549.0" prefHeight="25.0" prefWidth="160.0" />
+      <Button fx:id="placeOrderButton" layoutX="497.0" layoutY="613.0" mnemonicParsing="false" onAction="#placeOrder" prefHeight="44.0" prefWidth="315.0" text="Place Order">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <TextArea fx:id="customerPhoneNumber" layoutX="210.0" layoutY="58.0" prefHeight="38.0" prefWidth="221.0" />
+      <TextArea fx:id="customerPhoneNumber" editable="false" layoutX="210.0" layoutY="58.0" prefHeight="38.0" prefWidth="221.0" />
       <Label layoutX="497.0" layoutY="502.0" prefHeight="30.0" prefWidth="99.0" text="Sales Tax:">
          <font>
             <Font name="System Bold" size="20.0" />
@@ -48,10 +48,10 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextArea fx:id="salesTaxTextArea" layoutX="647.0" layoutY="498.0" prefHeight="25.0" prefWidth="160.0" />
-      <TextArea fx:id="subtotalTextArea" layoutX="645.0" layoutY="447.0" prefHeight="25.0" prefWidth="160.0" />
+      <TextArea fx:id="salesTaxTextArea" editable="false" layoutX="647.0" layoutY="498.0" prefHeight="25.0" prefWidth="160.0" />
+      <TextArea fx:id="subtotalTextArea" editable="false" layoutX="645.0" layoutY="447.0" prefHeight="25.0" prefWidth="160.0" />
       <ListView fx:id="orderListView" layoutX="47.0" layoutY="155.0" prefHeight="519.0" prefWidth="430.0" />
-      <Button fx:id="removeSelectedPizzaButton" layoutX="490.0" layoutY="155.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="315.0" text="Remove Selected Pizza">
+      <Button fx:id="removeSelectedPizzaButton" layoutX="490.0" layoutY="155.0" mnemonicParsing="false" onAction="#removeSelectedPizza" prefHeight="44.0" prefWidth="315.0" text="Remove Selected Pizza">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

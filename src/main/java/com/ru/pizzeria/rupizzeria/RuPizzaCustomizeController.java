@@ -76,11 +76,12 @@ public class RuPizzaCustomizeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources)
     {
 
+
         newOrder = new Order(phoneNumber);
 
 
         //CcomboBox
-        //System.out.println(mainController.deluxePizzaButton.getText()); //BUG, ONLY PRINTS DELUXE PIZZA
+        //System.out.prinetln(mainController.deluxePizzaButton.getText()); //BUG, ONLY PRINTS DELUXE PIZZA
 
         /*
        //create pizza
@@ -131,12 +132,6 @@ public class RuPizzaCustomizeController implements Initializable {
         //listview
         updateListView();
 
-
-        ObservableList<Topping> selectedToppingsList = FXCollections.observableArrayList(selectedToppings);
-        selectedToppingsListView.setItems(FXCollections.observableList(selectedToppingsList));
-        ObservableList<Topping> additionalToppingsList = FXCollections.observableArrayList(additionalToppings);
-        additionalToppingsListView.setItems(FXCollections.observableList(additionalToppingsList));
-
         //displays default price
         setPrice();
 
@@ -155,18 +150,20 @@ public class RuPizzaCustomizeController implements Initializable {
         phoneNumber = text;
     }
 
+    //change this method
     @FXML
     void addOrder(ActionEvent event) {
         newOrder.addPizza(pizza);
 
-        newOrder.printAllOrders();
+        //newOrder.printAllOrders();
         pizza = PizzaMaker.createPizza(pizzaButton.getText());
         setPrice();
         updateListView();
 
     }
 
-    public void updateListView() {
+    public void updateListView()
+    {
         selectedToppings = this.pizza.getToppings();
         ArrayList<Topping> allToppings = new ArrayList<Topping>(Arrays.asList(Topping.values()));
         allToppings.removeAll(selectedToppings);
