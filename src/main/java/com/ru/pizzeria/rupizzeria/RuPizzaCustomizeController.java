@@ -4,11 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.*;
@@ -77,7 +80,6 @@ public class RuPizzaCustomizeController implements Initializable {
     {
 
 
-        newOrder = new Order(phoneNumber);
 
 
         //CcomboBox
@@ -128,6 +130,7 @@ public class RuPizzaCustomizeController implements Initializable {
         String pizzaFlavor = pizzaButton.getText();
         Pizza pizza = PizzaMaker.createPizza(pizzaFlavor); //null
         this.pizza = pizza;
+        newOrder = new Order(phoneNumber);
 
         //listview
         updateListView();
@@ -152,15 +155,16 @@ public class RuPizzaCustomizeController implements Initializable {
 
     //change this method
     @FXML
-    void addOrder(ActionEvent event) {
+    void addOrder(ActionEvent event)throws IOException {
         newOrder.addPizza(pizza);
 
         //newOrder.printAllOrders();
         pizza = PizzaMaker.createPizza(pizzaButton.getText());
         setPrice();
         updateListView();
-
     }
+
+
 
     public void updateListView()
     {
@@ -182,12 +186,26 @@ public class RuPizzaCustomizeController implements Initializable {
         {
             if(selectedToppingsListView.getItems().size() > 0)
             {
-                if(checkDeluxeToppings(selectedToppingsListView.getSelectionModel().getSelectedItem())) {
-                    showConfirmationRemoveEssentialToppings();
-                }else {
-                    callRemoveToppings();
-                }
+                if(pizzaButton.getText().equals("Deluxe Pizza")) {
+                    if(checkDeluxeToppings(selectedToppingsListView.getSelectionModel().getSelectedItem())) {
+                        showConfirmationRemoveEssentialToppings();
+                    }else {
+                        callRemoveToppings();
+                    }
+                } else if(pizzaButton.getText().equals("Hawaiian Pizza")) {
+                    if(checkHawaiianToppings(selectedToppingsListView.getSelectionModel().getSelectedItem())) {
+                        showConfirmationRemoveEssentialToppings();
+                    }else {
+                        callRemoveToppings();
+                    }
 
+                } else if(pizzaButton.getText().equals("Pepperoni Pizza")) {
+                    if(checkPepperoniToppings(selectedToppingsListView.getSelectionModel().getSelectedItem())) {
+                        showConfirmationRemoveEssentialToppings();
+                    }else {
+                        callRemoveToppings();
+                    }
+                }
             }
             else if(selectedToppingsListView.getItems().size() <= 0) {
                showConfirmationNoToppingsOnPizza();
@@ -250,6 +268,20 @@ public class RuPizzaCustomizeController implements Initializable {
         if(selectedItem.toString().equals("Sausage") || selectedItem.toString().equals("Onion")
                 || selectedItem.toString().equals("GreenPepper") || selectedItem.toString().equals("BlackOlives")
                 || selectedItem.toString().equals("DicedTomatoes")) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkHawaiianToppings(Topping selectedItem) {
+        if(selectedItem.toString().equals("Pineapple") || selectedItem.toString().equals("Ham")){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkPepperoniToppings(Topping selectedItem) {
+        if(selectedItem.toString().equals("Pepperoni")) {
             return true;
         }
         return false;

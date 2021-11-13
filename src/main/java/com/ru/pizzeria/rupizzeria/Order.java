@@ -12,7 +12,6 @@ public class Order
         //contains an order number
         this.phoneNumber = phoneNumber;
         pizzas = new ArrayList<Pizza>();
-
     }
 
     public ArrayList<Pizza> getPizzas() {
@@ -58,5 +57,4 @@ public class Order
     }
 
      */
-
 }
