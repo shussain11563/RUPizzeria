@@ -13,15 +13,13 @@ import java.util.ResourceBundle;
 
 public class RuPizzaCurrentOrderController implements Initializable
 {
+    Order currentOrder;
 
     @FXML
     private TextArea customerPhoneNumber;
 
     @FXML
-    private ListView<?> orderListView;
-
-    @FXML
-    private TextArea orderTotalTextArea;
+    private ListView<String> orderListView;
 
     @FXML
     private Button placeOrderButton;
@@ -35,7 +33,8 @@ public class RuPizzaCurrentOrderController implements Initializable
     @FXML
     private TextArea subtotalTextArea;
 
-
+    @FXML
+    private TextArea orderTotalTextArea;
 
     //
     @Override
@@ -71,8 +70,29 @@ public class RuPizzaCurrentOrderController implements Initializable
         this.customerPhoneNumber.clear();
     }
 
+    public void calculateOrderTotal() {
 
+    }
 
+    public void calculateSubtotal() {
+
+    }
+
+    public void calculateSalesTax() {
+
+    }
+
+    public void setPhoneNumberTextArea(String phoneNumber) {
+        customerPhoneNumber.setText(phoneNumber);
+    }
+
+    public void setSubtotalTextArea(String subtotal) {
+        subtotalTextArea.setText(subtotal);
+    }
+    
+    public void setOrderTotalTextArea(String total) {
+        orderTotalTextArea.setText(total);
+    }
 
 
     @FXML
@@ -84,9 +104,6 @@ public class RuPizzaCurrentOrderController implements Initializable
         clear();
 
     }
-
-
-
 
     private void processCost()
     {

@@ -40,6 +40,8 @@ public class RuPizzeriaController implements Initializable {
 
     private StoreOrders storeOrders;
 
+    private Order currentOrder;
+
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
@@ -59,12 +61,14 @@ public class RuPizzeriaController implements Initializable {
 
     @FXML
     void openCurrentOrdersWindow(ActionEvent event) throws IOException {
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("current-order-view.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root, 900, 700));
         stage.setTitle("Customize Your Pizza");
         stage.show();
+
     }
 
     @FXML
@@ -94,8 +98,8 @@ public class RuPizzeriaController implements Initializable {
 
                 setController.setPizzaText(pizzaText);
                 setController.setPizzaPicture(pizzaImage);
-
                 setController.setPizzaPhoneNumber(customerPhoneNumber.getText());
+
                 setController.safeInitialize(); //safe initalizerTest
 
                 Stage stage = new Stage();
@@ -155,6 +159,10 @@ public class RuPizzeriaController implements Initializable {
 
         return true;
 
+    }
+
+    public void setCurrentOrder(Order newOrder) {
+        currentOrder = newOrder;
     }
 
 }
