@@ -26,8 +26,10 @@ public class RuPizzaCustomizeController implements Initializable {
     pr
      */
     private ArrayList<Topping> selectedToppings;
+
     private ArrayList<Topping> additionalToppings;
-    private Order newOrder;
+
+    //private Order newOrder;
 
     private String phoneNumber;
 
@@ -130,7 +132,8 @@ public class RuPizzaCustomizeController implements Initializable {
         String pizzaFlavor = pizzaButton.getText();
         Pizza pizza = PizzaMaker.createPizza(pizzaFlavor); //null
         this.pizza = pizza;
-        newOrder = new Order(phoneNumber);
+
+        //newOrder = new Order(phoneNumber);
 
         //listview
         updateListView();
