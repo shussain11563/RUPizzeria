@@ -1,17 +1,33 @@
 package com.ru.pizzeria.rupizzeria;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 
-public class RuPizzaCurrentOrderController {
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+public class RuPizzaCurrentOrderController implements Initializable
+{
 
     @FXML
     private TextArea customerPhoneNumber;
 
     @FXML
+    private ListView<?> orderListView;
+
+    @FXML
     private TextArea orderTotalTextArea;
+
+    @FXML
+    private Button placeOrderButton;
+
+    @FXML
+    private Button removeSelectedPizzaButton;
 
     @FXML
     private TextArea salesTaxTextArea;
@@ -19,13 +35,79 @@ public class RuPizzaCurrentOrderController {
     @FXML
     private TextArea subtotalTextArea;
 
-    @FXML
-    private ListView<String> orderListView;
+
+
+    //
+    @Override
+    public void initialize(URL location, ResourceBundle resources)
+    {
+        //private ListView<Pizza> orderListView;
+
+        //subtotal
+        //sales tax
+        //order total
+
+        //might requrie
+        //phone number
+        //order
+
+
+    }
+
+    public void initTest()
+    {
+        //ArrayList<Pizza> pizzasInOrder =
+        //ObservableList<Pizza> pizzas = FXCollections
+
+    }
+
+    //when add to order
+    private void clear()
+    {
+        //make a private method that forced textArea to be uneditable
+        this.salesTaxTextArea.clear();
+        this.subtotalTextArea.clear();
+        this.orderTotalTextArea.clear();
+        this.customerPhoneNumber.clear();
+    }
+
+
+
+
 
     @FXML
-    private Button placeOrderButton;
+    void placeOrder(ActionEvent event)
+    {
+
+
+        //add to store order
+        clear();
+
+    }
+
+
+
+
+    private void processCost()
+    {
+        //update all things
+        //make everything uneditable
+    }
 
     @FXML
-    private Button removeSelectedPizzaButton;
+    void removeSelectedPizza(ActionEvent event)
+    {
+        //ArrayList<Pizza> temp = new ArrayList<Pizza>();
+
+        //get clicked from listview -> pizza
+
+
+        //remove that pizza
+
+        //recalculate prices
+
+        //
+
+    }
 
 }

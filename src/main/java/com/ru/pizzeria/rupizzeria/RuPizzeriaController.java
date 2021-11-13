@@ -55,6 +55,8 @@ public class RuPizzeriaController implements Initializable {
 
     }
 
+
+
     @FXML
     void openCurrentOrdersWindow(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("current-order-view.fxml"));
@@ -92,11 +94,9 @@ public class RuPizzeriaController implements Initializable {
 
                 setController.setPizzaText(pizzaText);
                 setController.setPizzaPicture(pizzaImage);
-         
 
                 setController.setPizzaPhoneNumber(customerPhoneNumber.getText());
                 setController.safeInitialize(); //safe initalizerTest
-
 
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root, 900, 700));
