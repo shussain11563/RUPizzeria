@@ -1,5 +1,7 @@
 package com.ru.pizzeria.rupizzeria;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,7 +21,7 @@ public class RuPizzaCurrentOrderController implements Initializable
     private TextArea customerPhoneNumber;
 
     @FXML
-    private ListView<String> orderListView;
+    private ListView<Pizza> orderListView;
 
     @FXML
     private Button placeOrderButton;
@@ -68,6 +70,16 @@ public class RuPizzaCurrentOrderController implements Initializable
     {
         this.currentOrder = mainController.getCurrentOrder();
         this.storeOrders = mainController.getStoreOrder();
+
+        //System.out.println(this.currentOrder.getPizzas().get(0).toppings);
+
+
+        //listview
+        ObservableList<Pizza> pizzasList = FXCollections.observableArrayList(this.currentOrder.getPizzas());
+        this.orderListView.setItems(FXCollections.observableList(pizzasList));
+
+
+
     }
 
 

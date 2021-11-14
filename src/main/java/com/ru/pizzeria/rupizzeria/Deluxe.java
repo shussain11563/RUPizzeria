@@ -37,5 +37,11 @@ public class Deluxe extends Pizza {
         return runningCost;
     }
 
+    public static void main(String[] args)
+    {
+        Pizza pizza = new Deluxe();
+        System.out.println(pizza);
+    }
+
 
 }
