@@ -74,6 +74,7 @@ public class RuPizzaCurrentOrderController implements Initializable
         ObservableList<Pizza> pizzasList = FXCollections.observableArrayList(this.currentOrder.getPizzas());
         this.orderListView.setItems(FXCollections.observableList(pizzasList));
 
+        setPhoneNumberTextArea(this.currentOrder.getPhoneNumber());
         //setting all the price boxes
     }
 
@@ -89,7 +90,7 @@ public class RuPizzaCurrentOrderController implements Initializable
     }
 
     public void calculateOrderTotal() {
-
+        
     }
 
     public void calculateSubtotal() {
