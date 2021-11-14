@@ -1,5 +1,7 @@
 package com.ru.pizzeria.rupizzeria;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +16,8 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class RuPizzaStoreOrderController implements Initializable
@@ -23,7 +27,7 @@ public class RuPizzaStoreOrderController implements Initializable
     private Button cancelOrderButton;
 
     @FXML
-    private ComboBox<?> customerPhoneNumberComboBox;
+    private ComboBox<String> customerPhoneNumberComboBox;
 
     @FXML
     private Button exportStoreOrdersButton;
@@ -52,6 +56,26 @@ public class RuPizzaStoreOrderController implements Initializable
     public void safeInitialize()
     {
         this.storeOrders = mainController.getStoreOrder();
+
+        //make this a method
+        ArrayList<String> phoneNumbers = new ArrayList<String>();
+        ArrayList<Order> orders = this.storeOrders.getOrders();
+        for(int i = 0; i < orders.size(); i++)
+        {
+            phoneNumbers.add(orders.get(i).getPhoneNumber());
+        }
+        ObservableList<String> phoneNumbersList = FXCollections.observableArrayList(phoneNumbers);
+        this.customerPhoneNumberComboBox.setItems(phoneNumbersList);
+
+        //make the first phone number one default
+        //combo box menu
+
+        /*
+        ObservableList<Size> options =  FXCollections.observableList(Arrays.asList(Size.values()));
+        myComboBox.setItems(options);
+        myComboBox.setValue(Size.Small); //default value
+        *
+         */
     }
 
 
