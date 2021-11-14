@@ -85,7 +85,9 @@ public class RuPizzeriaController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("store-orders-view.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         RuPizzaStoreOrderController setController = fxmlLoader.getController();
+
         setController.setMainController(this);
+        setController.safeInitialize();
 
 
         Stage stage = new Stage();
