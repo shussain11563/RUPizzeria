@@ -5,12 +5,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class RuPizzaCurrentOrderController implements Initializable
@@ -71,15 +70,11 @@ public class RuPizzaCurrentOrderController implements Initializable
         this.currentOrder = mainController.getCurrentOrder();
         this.storeOrders = mainController.getStoreOrder();
 
-        //System.out.println(this.currentOrder.getPizzas().get(0).toppings);
-
-
         //listview
         ObservableList<Pizza> pizzasList = FXCollections.observableArrayList(this.currentOrder.getPizzas());
         this.orderListView.setItems(FXCollections.observableList(pizzasList));
 
-
-
+        //setting all the price boxes
     }
 
 
@@ -138,6 +133,15 @@ public class RuPizzaCurrentOrderController implements Initializable
     @FXML
     void removeSelectedPizza(ActionEvent event)
     {
+        if(orderListView.getSelectionModel().getSelectedItem() != null) {
+            if(orderListView.getItems().size() > 1) {
+                callRemovePizza();
+            }else {
+                showNoPizzasInOrder();
+            }
+        }
+
+
         //ArrayList<Pizza> temp = new ArrayList<Pizza>();
 
         //get clicked from listview -> pizza
@@ -148,6 +152,20 @@ public class RuPizzaCurrentOrderController implements Initializable
         //recalculate prices
 
         //
+
+    }
+    public void callRemovePizza() {
+        Pizza pizza = orderListView.getSelectionModel().getSelectedItem();
+        orderListView.getItems().remove(pizza);
+        this.currentOrder.removePizza(pizza);
+
+    }
+    public void showNoPizzasInOrder() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Warning with Removing Pizzas From Order");
+        alert.setHeaderText("Removing Pizzas");
+        alert.setContentText("You are removing the last Pizza in the Order");
+        Optional<ButtonType> result = alert.showAndWait();
 
     }
 
