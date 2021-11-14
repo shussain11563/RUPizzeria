@@ -8,12 +8,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class RuPizzaCurrentOrderController implements Initializable
 {
+    static final double SALES_TAX_RATE = 0.0625;
     Order currentOrder;
 
     @FXML
@@ -43,21 +45,13 @@ public class RuPizzaCurrentOrderController implements Initializable
 
     private StoreOrders storeOrders;
 
-    //
+    private double salesTax;
+    private double orderTotal;
+    private double subtotal;
+
+
     @Override
-    public void initialize(URL location, ResourceBundle resources)
-    {
-        //private ListView<Pizza> orderListView;
-
-        //subtotal
-        //sales tax
-        //order total
-
-        //might requrie
-        //phone number
-        //order
-
-
+    public void initialize(URL location, ResourceBundle resources) {
     }
 
     public void setMainController(RuPizzeriaController controller)
@@ -73,13 +67,10 @@ public class RuPizzaCurrentOrderController implements Initializable
         //listview
         ObservableList<Pizza> pizzasList = FXCollections.observableArrayList(this.currentOrder.getPizzas());
         this.orderListView.setItems(FXCollections.observableList(pizzasList));
-
-        setPhoneNumberTextArea(this.currentOrder.getPhoneNumber());
-        //setting all the price boxes
+        processCost();
+        updatePrices();
     }
 
-
-    //when add to order
     private void clear()
     {
         //make a private method that forced textArea to be uneditable
@@ -87,18 +78,32 @@ public class RuPizzaCurrentOrderController implements Initializable
         this.subtotalTextArea.clear();
         this.orderTotalTextArea.clear();
         this.customerPhoneNumber.clear();
+        this.orderListView.getItems().clear();
     }
 
     public void calculateOrderTotal() {
-        
+        this.orderTotal = this.subtotal + this.salesTax;
     }
 
     public void calculateSubtotal() {
+        double subtotal = 0;
 
+        ArrayList<Pizza> pizzas = this.currentOrder.getPizzas();
+
+        for(int i = 0; i < pizzas.size(); i++) {
+            subtotal += pizzas.get(i).getPrice();
+        }
+
+        this.subtotal = subtotal;
     }
 
     public void calculateSalesTax() {
+        this.salesTax = SALES_TAX_RATE * subtotal;
+    }
 
+    public String priceToString(double value) {
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        return String.format("$%s", df.format(value));
     }
 
     public void setPhoneNumberTextArea(String phoneNumber) {
@@ -108,6 +113,10 @@ public class RuPizzaCurrentOrderController implements Initializable
     public void setSubtotalTextArea(String subtotal) {
         subtotalTextArea.setText(subtotal);
     }
+
+    public void setSalesTaxTextArea(String salesTax) {
+        salesTaxTextArea.setText(salesTax);
+    }
     
     public void setOrderTotalTextArea(String total) {
         orderTotalTextArea.setText(total);
@@ -115,28 +124,23 @@ public class RuPizzaCurrentOrderController implements Initializable
 
 
     @FXML
-    void placeOrder(ActionEvent event)
-    {
-         //
-        this.storeOrders.addOrder(this.order);
-
-
-        //add to store order
-        clear(); //fix clear
-        //wipe order variable to null
-        //assign order variable to null
-
+    void placeOrder(ActionEvent event) {
+        showConfirmationForOrderToBePlaced();
     }
 
-    private void processCost()
-    {
-        //update all things
-        //make everything uneditable
+    private void processCost() {
+        calculateSubtotal();
+        calculateSalesTax();
+        calculateOrderTotal();
     }
-
+    private void updatePrices() {
+        setPhoneNumberTextArea(this.currentOrder.getPhoneNumber());
+        setSubtotalTextArea(priceToString(subtotal));
+        setSalesTaxTextArea(priceToString(salesTax));
+        setOrderTotalTextArea(priceToString(orderTotal));
+    }
     @FXML
-    void removeSelectedPizza(ActionEvent event)
-    {
+    void removeSelectedPizza(ActionEvent event) {
         if(orderListView.getSelectionModel().getSelectedItem() != null) {
             if(orderListView.getItems().size() > 1) {
                 callRemovePizza();
@@ -145,32 +149,34 @@ public class RuPizzaCurrentOrderController implements Initializable
             }
         }
 
-
-        //ArrayList<Pizza> temp = new ArrayList<Pizza>();
-
-        //get clicked from listview -> pizza
-
-
-        //remove that pizza
-
-        //recalculate prices
-
-        //
-
+        processCost();
+        updatePrices();
     }
+
     public void callRemovePizza() {
         Pizza pizza = orderListView.getSelectionModel().getSelectedItem();
         orderListView.getItems().remove(pizza);
         this.currentOrder.removePizza(pizza);
-
     }
+
     public void showNoPizzasInOrder() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Warning with Removing Pizzas From Order");
         alert.setHeaderText("Removing Pizzas");
         alert.setContentText("You are removing the last Pizza in the Order");
         Optional<ButtonType> result = alert.showAndWait();
+    }
 
+    public void showConfirmationForOrderToBePlaced() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Warning with Placing Order");
+        alert.setHeaderText("Place the order");
+        alert.setContentText("You are about to place an order");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get() == ButtonType.OK) {
+            this.storeOrders.addOrder(this.order);
+            clear();
+        }
     }
 
 }
