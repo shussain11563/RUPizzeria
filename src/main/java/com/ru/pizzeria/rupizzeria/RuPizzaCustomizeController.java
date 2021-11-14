@@ -165,9 +165,16 @@ public class RuPizzaCustomizeController implements Initializable {
         this.currentOrder.addPizza(this.pizza);
 
 
+
         //newOrder.printAllOrders();
         //pizza = PizzaMaker.createPizza(pizzaButton.getText());
+        // reset toppings clearView()
+
         setPrice();
+        String pizzaFlavor = pizzaButton.getText();
+        Pizza pizza = PizzaMaker.createPizza(pizzaFlavor);
+        this.pizza = pizza;
+
         //updateListView();
     }
 

@@ -124,6 +124,7 @@ public class RuPizzaCurrentOrderController implements Initializable
          //
         this.storeOrders.addOrder(this.order);
 
+
         //add to store order
         clear(); //fix clear
 

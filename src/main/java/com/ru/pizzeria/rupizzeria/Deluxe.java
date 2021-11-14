@@ -1,15 +1,12 @@
 package com.ru.pizzeria.rupizzeria;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Deluxe extends Pizza {
     private static final double MIN_COST = 12.99;
     private static final int MIN_TOPPING = 5;
 
     public Deluxe() {
         //use collection
+        //make it a one liner
         this.toppings.add(Topping.Sausage);
         this.toppings.add(Topping.Onion);
         this.toppings.add(Topping.GreenPepper);
