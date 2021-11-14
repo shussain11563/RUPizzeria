@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -70,6 +71,7 @@ public class RuPizzeriaController implements Initializable {
 
         RuPizzaCurrentOrderController setController = fxmlLoader.getController();
         setController.setMainController(this);
+        setController.safeInitialize();
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root, 900, 700));
@@ -102,6 +104,26 @@ public class RuPizzeriaController implements Initializable {
          */
     }
 
+    /*
+    //NOT FOUND
+    private boolean orderInStoreOrder(String phoneNumber)
+    {
+        ArrayList<Order> orders = this.storeOrders.getOrders();
+        for(int i = 0; i < orders.size() ; i++)
+        {
+            if(orders.get(i).getPhoneNumber().equals(phoneNumber))
+            {
+                return true;
+                //System.out.println()
+            }
+        }
+
+        return false;
+
+    }
+
+     */
+
 
     public void openPizzaCustomizationView(String pizzaText, Image pizzaImage) throws IOException
     {
@@ -123,11 +145,52 @@ public class RuPizzeriaController implements Initializable {
 
         //but how would we order the 7 pizzas without reset the order
 
-        //morning problem but i have an idea
+        //chaneg th
 
+        /*
+        if order is null or is a new phone number
+        --> create/reinstantiate order
+
+
+
+         */
+
+
+
+        /*
+        if(!orderInStoreOrder(customerPhoneNumber.getText().trim()))
+        {
+            //check order too and see if its alreayd instantiated, maybet his method is not neccessary
+
+            //reinstantiate
+
+
+        }
+
+        //
+
+         */
+       //remove the redundandant code from my implementation
+        boolean isValid = checkPhoneNumber(customerPhoneNumber.getText().trim());
+        boolean isSameNumber = this.currentOrder != null && (this.currentOrder.getPhoneNumber().equals(customerPhoneNumber.getText().trim()));
+
+        if(this.currentOrder == null || (isValid == true && isSameNumber == false))
+        {
+
+            System.out.println(this.currentOrder == null);
+            System.out.println((isValid == true && isSameNumber == false));
+
+
+            this.currentOrder = new Order(this.customerPhoneNumber.getText().trim());
+            System.out.println("Are we resetting?");
+
+        }
+
+        //we might need our store order method we deleteed to see if a duplicate phone number is being entered
 
         if(checkPhoneNumber(customerPhoneNumber.getText().trim()))
         {
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
             alert.setHeaderText("Pizza Order");
@@ -214,8 +277,11 @@ public class RuPizzeriaController implements Initializable {
 
 
     //??
+    /*
     public void setCurrentOrder(Order newOrder) {
         currentOrder = newOrder;
     }
+
+     */
 
 }
