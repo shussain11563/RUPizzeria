@@ -87,6 +87,11 @@ public class RuPizzaCurrentOrderController implements Initializable
         this.subtotalTextArea.clear();
         this.orderTotalTextArea.clear();
         this.customerPhoneNumber.clear();
+
+        //this.salesTaxTextArea.setDisable(true);
+        //this.customerPhoneNumber.setDisable(true);
+        //this.orderTotalTextArea.setDisable(true);
+        //this.customerPhoneNumber.setDisable(true);
     }
 
     public void calculateOrderTotal() {
