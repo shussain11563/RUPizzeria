@@ -43,7 +43,7 @@ public class StoreOrders
      */
 
     //not sure about signature
-    public void export(File file) throws FileNotFoundException
+    public void export(File file) throws FileNotFoundException //throws FileNotFoundException
     {
         //add try catch for for closing and file not found but idk because printwriter creates a new file, so may not be neccessary?s
         PrintWriter printWriter = new PrintWriter(file);

@@ -12,6 +12,7 @@ import java.io.File;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,37 +34,56 @@ public class RuPizzaStoreOrderController implements Initializable
     @FXML
     private ListView<Order> storeOrderListView;
 
+    private RuPizzeriaController mainController;
+
+    private StoreOrders storeOrders;
+
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
 
     }
 
+    public void setMainController(RuPizzeriaController controller)
+    {
+        this.mainController = controller;
+    }
+
+    public void safeInitialize()
+    {
+        this.storeOrders = mainController.getStoreOrder();
+    }
+
 
     @FXML
-    void cancelOrder(ActionEvent event) {
+    void cancelOrder(ActionEvent event)
+    {
 
     }
 
     @FXML
     void exportStoreOrders(ActionEvent event)
     {
-
-
-    }
-
-    void exportFile(ActionEvent event) {
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Open Target File for the Export");
         chooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"),
                 new ExtensionFilter("All Files", "*.*"));
         Stage stage = new Stage();
         File targeFile = chooser.showSaveDialog(stage); //get the reference of the target file
+        try
+        {
+            this.storeOrders.export(targeFile);
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println("FIle not hehrehwidjewiji");
+            //put alert box!!!
+
+        }
 
 
-        //write code to write to the file.
-        //order.export(targeFile);
     }
+
 
 
 

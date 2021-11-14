@@ -36,6 +36,12 @@ public class RuPizzaCurrentOrderController implements Initializable
     @FXML
     private TextArea orderTotalTextArea;
 
+    private RuPizzeriaController mainController;
+
+    private Order order;
+
+    private StoreOrders storeOrders;
+
     //
     @Override
     public void initialize(URL location, ResourceBundle resources)
@@ -53,12 +59,17 @@ public class RuPizzaCurrentOrderController implements Initializable
 
     }
 
-    public void initTest()
+    public void setMainController(RuPizzeriaController controller)
     {
-        //ArrayList<Pizza> pizzasInOrder =
-        //ObservableList<Pizza> pizzas = FXCollections
-
+        mainController = controller;
     }
+
+    public void safeInitialize()
+    {
+        this.currentOrder = mainController.getCurrentOrder();
+        this.storeOrders = mainController.getStoreOrder();
+    }
+
 
     //when add to order
     private void clear()
@@ -98,10 +109,11 @@ public class RuPizzaCurrentOrderController implements Initializable
     @FXML
     void placeOrder(ActionEvent event)
     {
-
+         //
+        this.storeOrders.addOrder(this.order);
 
         //add to store order
-        clear();
+        clear(); //fix clear
 
     }
 

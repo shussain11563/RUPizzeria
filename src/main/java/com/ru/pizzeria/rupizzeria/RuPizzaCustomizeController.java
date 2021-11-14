@@ -26,8 +26,10 @@ public class RuPizzaCustomizeController implements Initializable {
     pr
      */
     private ArrayList<Topping> selectedToppings;
+
     private ArrayList<Topping> additionalToppings;
-    private Order newOrder;
+
+    //private Order newOrder;
 
     private String phoneNumber;
 
@@ -53,9 +55,10 @@ public class RuPizzaCustomizeController implements Initializable {
     @FXML
     private ListView<Topping> additionalToppingsListView;
 
+    private Order currentOrder;
+
     public void setMainController(RuPizzeriaController controller)
     {
-
         mainController = controller;
     }
 
@@ -127,10 +130,12 @@ public class RuPizzaCustomizeController implements Initializable {
 
     public void safeInitialize()
     {
+        this.currentOrder = mainController.getCurrentOrder();
         String pizzaFlavor = pizzaButton.getText();
         Pizza pizza = PizzaMaker.createPizza(pizzaFlavor); //null
         this.pizza = pizza;
-        newOrder = new Order(phoneNumber);
+
+        //newOrder = new Order(phoneNumber);
 
         //listview
         updateListView();
@@ -155,13 +160,15 @@ public class RuPizzaCustomizeController implements Initializable {
 
     //change this method
     @FXML
-    void addOrder(ActionEvent event)throws IOException {
-        newOrder.addPizza(pizza);
+    void addOrder(ActionEvent event)throws IOException
+    {
+        this.currentOrder.addPizza(this.pizza);
+
 
         //newOrder.printAllOrders();
-        pizza = PizzaMaker.createPizza(pizzaButton.getText());
+        //pizza = PizzaMaker.createPizza(pizzaButton.getText());
         setPrice();
-        updateListView();
+        //updateListView();
     }
 
 
@@ -179,6 +186,8 @@ public class RuPizzaCustomizeController implements Initializable {
         ObservableList<Topping> additionalToppingsList = FXCollections.observableArrayList(additionalToppings);
         additionalToppingsListView.setItems(FXCollections.observableList(additionalToppingsList));
     }
+
+    //make less redundant
     @FXML
     void removeToppings(ActionEvent event)
     {

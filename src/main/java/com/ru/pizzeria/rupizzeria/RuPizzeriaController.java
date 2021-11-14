@@ -57,13 +57,20 @@ public class RuPizzeriaController implements Initializable {
 
     }
 
-
+    public StoreOrders getStoreOrder()
+    {
+        return this.storeOrders;
+    }
 
     @FXML
     void openCurrentOrdersWindow(ActionEvent event) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("current-order-view.fxml"));
         Parent root = (Parent) fxmlLoader.load();
+
+        RuPizzaCurrentOrderController setController = fxmlLoader.getController();
+        setController.setMainController(this);
+
         Stage stage = new Stage();
         stage.setScene(new Scene(root, 900, 700));
         stage.setTitle("Customize Your Pizza");
@@ -75,30 +82,69 @@ public class RuPizzeriaController implements Initializable {
     void openManageStoreOrdersWindow(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("store-orders-view.fxml"));
         Parent root = (Parent) fxmlLoader.load();
+        RuPizzaStoreOrderController setController = fxmlLoader.getController();
+        setController.setMainController(this);
+
+
         Stage stage = new Stage();
         stage.setScene(new Scene(root, 900, 700));
         stage.setTitle("Store Orders");
         stage.show();
+
+        /*
+
+                setController.setPizzaText(pizzaText);
+                setController.setPizzaPicture(pizzaImage);
+                //setController.setPizzaPhoneNumber(customerPhoneNumber.getText());
+
+                setController.safeInitialize(); //safe initalizerTest
+
+         */
     }
 
 
     public void openPizzaCustomizationView(String pizzaText, Image pizzaImage) throws IOException
     {
-        if(checkPhoneNumber(customerPhoneNumber.getText().trim())) {
+        //if a new phone number is defined in the text field, create new order
+        //check through store orders
+
+        //hypothetical
+        //we have 123-456-7890 and they put 7 pizzas into Order foo
+        //but they do not order it
+        // option 1 - keep the order up because the number is still up
+        // option 2 -  a new number is put up, we reset the order
+        // option 2 elegant, we check through storeOrder and see if it is not defined
+        //option 2 elegant refined, everytime a new phone number is entered, we check store number and do elegant 2
+
+        //problem with option 2 elegant
+
+        // lets say 123-456-7890 put 7 pizzas in Order foo but the order was not placed
+        // now lets say we put 1234567892 and get 7 orders
+
+        //but how would we order the 7 pizzas without reset the order
+
+        //morning problem but i have an idea
+
+
+        if(checkPhoneNumber(customerPhoneNumber.getText().trim()))
+        {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
             alert.setHeaderText("Pizza Order");
             alert.setContentText("Click to Continue with Order");
 
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
+            if (result.get() == ButtonType.OK)
+            {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pizza-customize-view.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 RuPizzaCustomizeController setController = fxmlLoader.getController();
 
+                setController.setMainController(this);
+
                 setController.setPizzaText(pizzaText);
                 setController.setPizzaPicture(pizzaImage);
-                setController.setPizzaPhoneNumber(customerPhoneNumber.getText());
+                //setController.setPizzaPhoneNumber(customerPhoneNumber.getText());
 
                 setController.safeInitialize(); //safe initalizerTest
 
@@ -108,6 +154,7 @@ public class RuPizzeriaController implements Initializable {
                 stage.show();
 
             }
+
         }
         else
         {
@@ -115,6 +162,10 @@ public class RuPizzeriaController implements Initializable {
         }
 
 
+    }
+
+    public Order getCurrentOrder() {
+        return currentOrder;
     }
 
     @FXML
@@ -161,6 +212,8 @@ public class RuPizzeriaController implements Initializable {
 
     }
 
+
+    //??
     public void setCurrentOrder(Order newOrder) {
         currentOrder = newOrder;
     }
