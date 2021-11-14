@@ -40,7 +40,7 @@ public class RuPizzeriaController implements Initializable {
 
     private StoreOrders storeOrders;
 
-        private Order currentOrder;
+    private Order currentOrder;
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
@@ -57,13 +57,20 @@ public class RuPizzeriaController implements Initializable {
 
     }
 
-
+    public StoreOrders getStoreOrder()
+    {
+        return this.storeOrders;
+    }
 
     @FXML
     void openCurrentOrdersWindow(ActionEvent event) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("current-order-view.fxml"));
         Parent root = (Parent) fxmlLoader.load();
+
+        RuPizzaCurrentOrderController setController = fxmlLoader.getController();
+        setController.setMainController(this);
+
         Stage stage = new Stage();
         stage.setScene(new Scene(root, 900, 700));
         stage.setTitle("Customize Your Pizza");
@@ -75,10 +82,24 @@ public class RuPizzeriaController implements Initializable {
     void openManageStoreOrdersWindow(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("store-orders-view.fxml"));
         Parent root = (Parent) fxmlLoader.load();
+        RuPizzaStoreOrderController setController = fxmlLoader.getController();
+        setController.setMainController(this);
+
+
         Stage stage = new Stage();
         stage.setScene(new Scene(root, 900, 700));
         stage.setTitle("Store Orders");
         stage.show();
+
+        /*
+
+                setController.setPizzaText(pizzaText);
+                setController.setPizzaPicture(pizzaImage);
+                //setController.setPizzaPhoneNumber(customerPhoneNumber.getText());
+
+                setController.safeInitialize(); //safe initalizerTest
+
+         */
     }
 
 
@@ -119,6 +140,8 @@ public class RuPizzeriaController implements Initializable {
                 Parent root = (Parent) fxmlLoader.load();
                 RuPizzaCustomizeController setController = fxmlLoader.getController();
 
+                setController.setMainController(this);
+
                 setController.setPizzaText(pizzaText);
                 setController.setPizzaPicture(pizzaImage);
                 //setController.setPizzaPhoneNumber(customerPhoneNumber.getText());
@@ -131,6 +154,7 @@ public class RuPizzeriaController implements Initializable {
                 stage.show();
 
             }
+
         }
         else
         {
@@ -138,6 +162,10 @@ public class RuPizzeriaController implements Initializable {
         }
 
 
+    }
+
+    public Order getCurrentOrder() {
+        return currentOrder;
     }
 
     @FXML
