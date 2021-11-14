@@ -24,7 +24,9 @@ public class StoreOrders
         this.orders.remove(order);
     }
 
-
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
 
     /*
     @Override
