@@ -127,6 +127,8 @@ public class RuPizzaCurrentOrderController implements Initializable
 
         //add to store order
         clear(); //fix clear
+        //wipe order variable to null
+        //assign order variable to null
 
     }
 
