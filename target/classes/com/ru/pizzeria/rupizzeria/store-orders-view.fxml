@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.pizzeria.rupizzeria.RuPizzaStoreOrderController">
+   <children>
+      <Label layoutX="391.0" layoutY="14.0" text="Store Orders">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <FlowPane layoutX="413.0" layoutY="311.0" prefHeight="64.0" prefWidth="174.0" />
+      <Label layoutX="47.0" layoutY="62.0" text="Customer Phone Number:">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="538.0" layoutY="106.0" text="Order Total $">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="orderTotalTextArea" editable="false" layoutX="674.0" layoutY="103.0" prefHeight="37.0" prefWidth="205.0" />
+      <Button fx:id="cancelOrderButton" layoutX="538.0" layoutY="163.0" mnemonicParsing="false" onAction="#cancelOrder" prefHeight="44.0" prefWidth="342.0" text="Cancel Order">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="exportStoreOrdersButton" layoutX="538.0" layoutY="234.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="342.0" text="Export Store Orders">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <ListView fx:id="storeOrderListView" layoutX="47.0" layoutY="105.0" prefHeight="576.0" prefWidth="465.0" />
+      <ComboBox fx:id="customerPhoneNumberComboBox" layoutX="308.0" layoutY="65.0" onAction="#exportStoreOrders" prefHeight="25.0" prefWidth="205.0" />
+   </children>
+</AnchorPane>
