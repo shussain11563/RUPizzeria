@@ -67,6 +67,7 @@ public class RuPizzaStoreOrderController implements Initializable
         ArrayList<Order> orders = this.storeOrders.getOrders();
         for(int i = 0; i < orders.size(); i++)
         {
+            System.out.println(i + ": " + orders.get(i).getPhoneNumber());
             phoneNumbers.add(orders.get(i).getPhoneNumber());
         }
         ObservableList<String> phoneNumbersList = FXCollections.observableArrayList(phoneNumbers);

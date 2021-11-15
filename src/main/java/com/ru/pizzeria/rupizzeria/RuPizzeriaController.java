@@ -93,7 +93,6 @@ public class RuPizzeriaController implements Initializable {
         setController.setMainController(this);
         setController.safeInitialize();
 
-
         Stage stage = new Stage();
         stage.setScene(new Scene(root, 900, 700));
         stage.setTitle("Store Orders");
