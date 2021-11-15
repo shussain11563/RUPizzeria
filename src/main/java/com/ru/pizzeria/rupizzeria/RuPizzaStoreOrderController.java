@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import java.io.File;
 import javafx.stage.Stage;
@@ -119,12 +116,19 @@ public class RuPizzaStoreOrderController implements Initializable
         }
         catch (FileNotFoundException e)
         {
-            System.out.println("FIle not hehrehwidjewiji");
-            //put alert box!!!
+            errorNoFileFound();
 
         }
 
 
+    }
+
+    private void errorNoFileFound()
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error with File");
+        alert.setContentText("File was not found.");
+        alert.showAndWait();
     }
 
 
