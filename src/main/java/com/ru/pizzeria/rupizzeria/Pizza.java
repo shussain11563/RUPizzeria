@@ -57,6 +57,9 @@ public abstract class Pizza
         this.size = size;
     }
 
+    public double getPrice(){
+        return price;
+    }
     public double calculateSalesTax()
     {
         return 0;
