@@ -21,7 +21,7 @@ public class Order
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return this.phoneNumber;
     }
 
 
