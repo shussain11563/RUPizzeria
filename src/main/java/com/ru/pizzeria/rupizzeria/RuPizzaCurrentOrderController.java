@@ -86,6 +86,7 @@ public class RuPizzaCurrentOrderController implements Initializable
         //this.customerPhoneNumber.setDisable(true);
 
         this.orderListView.getItems().clear();
+        this.currentOrder = null;
 
     }
 
@@ -97,7 +98,6 @@ public class RuPizzaCurrentOrderController implements Initializable
         double subtotal = 0;
 
         ArrayList<Pizza> pizzas = this.currentOrder.getPizzas();
-
         for(int i = 0; i < pizzas.size(); i++) {
             subtotal += pizzas.get(i).getPrice();
         }
@@ -155,10 +155,11 @@ public class RuPizzaCurrentOrderController implements Initializable
             }else {
                 showNoPizzasInOrder();
             }
+            processCost();
+            updatePrices();
         }
 
-        processCost();
-        updatePrices();
+
     }
 
     public void callRemovePizza() {
@@ -176,15 +177,27 @@ public class RuPizzaCurrentOrderController implements Initializable
     }
 
     public void showConfirmationForOrderToBePlaced() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Warning with Placing Order");
-        alert.setHeaderText("Place the order");
-        alert.setContentText("You are about to place an order");
-        Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == ButtonType.OK) {
-            this.storeOrders.addOrder(this.order);
-            clear();
+        if(this.currentOrder != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Warning with Placing Order");
+            alert.setHeaderText("Place the order");
+            alert.setContentText("You are about to place an order");
+            Optional<ButtonType> result = alert.showAndWait();
+            if(result.get() == ButtonType.OK) {
+                this.storeOrders.addOrder(this.order);
+                clear();
+            }
+        }else {
+            errorNoCurrentOrderAlert();
         }
+
     }
 
+    private void errorNoCurrentOrderAlert()
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error with Current Order");
+        alert.setContentText("There is not current order.");
+        alert.showAndWait();
+    }
 }

@@ -12,6 +12,8 @@ public class Order
         //contains an order number
         this.phoneNumber = phoneNumber;
         pizzas = new ArrayList<Pizza>();
+        System.out.println(phoneNumber);
+
     }
 
     public ArrayList<Pizza> getPizzas() {
@@ -27,6 +29,8 @@ public class Order
     public void addPizza(Pizza pizza)
     {
         this.pizzas.add(pizza);
+        System.out.println(pizza.price);
+
     }
 
     public void removePizza(Pizza pizza)

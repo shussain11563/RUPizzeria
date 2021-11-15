@@ -162,20 +162,18 @@ public class RuPizzaCustomizeController implements Initializable {
     @FXML
     void addOrder(ActionEvent event)throws IOException
     {
+
         this.currentOrder.addPizza(this.pizza);
-
-
 
         //newOrder.printAllOrders();
         //pizza = PizzaMaker.createPizza(pizzaButton.getText());
         // reset toppings clearView()
 
-        setPrice();
         String pizzaFlavor = pizzaButton.getText();
         Pizza pizza = PizzaMaker.createPizza(pizzaFlavor);
         this.pizza = pizza;
-
-        //updateListView();
+        updateListView();
+        setPrice();
     }
 
 

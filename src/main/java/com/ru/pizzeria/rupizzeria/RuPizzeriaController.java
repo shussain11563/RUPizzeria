@@ -65,18 +65,22 @@ public class RuPizzeriaController implements Initializable {
 
     @FXML
     void openCurrentOrdersWindow(ActionEvent event) throws IOException {
+        if(this.currentOrder != null) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("current-order-view.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("current-order-view.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
+            RuPizzaCurrentOrderController setController = fxmlLoader.getController();
+            setController.setMainController(this);
+            setController.safeInitialize();
 
-        RuPizzaCurrentOrderController setController = fxmlLoader.getController();
-        setController.setMainController(this);
-        setController.safeInitialize();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root, 900, 700));
+            stage.setTitle("Customize Your Pizza");
+            stage.show();
+        }else {
+            errorNoCurrentOrderAlert();
+        }
 
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root, 900, 700));
-        stage.setTitle("Customize Your Pizza");
-        stage.show();
 
     }
 
@@ -88,7 +92,6 @@ public class RuPizzeriaController implements Initializable {
 
         setController.setMainController(this);
         setController.safeInitialize();
-
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root, 900, 700));
@@ -223,7 +226,7 @@ public class RuPizzeriaController implements Initializable {
         }
         else
         {
-            errorAlert();
+            errorInvalidPhoneNumberAlert();
         }
 
 
@@ -251,11 +254,19 @@ public class RuPizzeriaController implements Initializable {
         openPizzaCustomizationView("Pepperoni Pizza", pepperoniImage.getImage());
     }
 
-    private void errorAlert()
+    private void errorInvalidPhoneNumberAlert()
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error with Phone Number");
         alert.setContentText("Phone Number Not Valid");
+        alert.showAndWait();
+    }
+
+    private void errorNoCurrentOrderAlert()
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error with Current Order");
+        alert.setContentText("There is not current order.");
         alert.showAndWait();
     }
 
