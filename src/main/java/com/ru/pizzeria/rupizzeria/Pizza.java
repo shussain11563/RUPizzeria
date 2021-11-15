@@ -1,27 +1,43 @@
 package com.ru.pizzeria.rupizzeria;
 
+/**
+ * The Pizza class acts as a blueprint for a Pizza object
+ * and its subclasses such as Deluxe, Hawaiian, and Pepperoni
+ * which contains attributes such as toppings, size, price.
+ * This class also contains methods to allow pizza objects with
+ * manipulation of toppings and calculation of pizzas.
+ * @author Sharia Hussain, David Lam
+ */
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public abstract class Pizza
-{
-    static final double SALES_TAX_RATE = 6.625;
-    static final int MAX_TOPPINGS = 7;
-    static final double SIZE_INCREASE_COST = 2;
-    static final double ADDITIONAL_TOPPINGS_COST = 1.49;
-    double price;
+public abstract class Pizza {
 
-    //MAX TOPPINGS
-    //static final MAX_TOPPINGS = 7;
-    //static final
+    double price;
     protected ArrayList<Topping> toppings = new ArrayList<Topping>();
     protected Size size;
+
+    /** Constants used for the sales tax for all Pizzas */
+    static final double SALES_TAX_RATE = 6.625;
+
+    /** Constants used for the maximum toppings for all Pizzas */
+    static final int MAX_TOPPINGS = 7;
+
+    /** Constants used for the increase in price when size changes */
+    static final double SIZE_INCREASE_COST = 2;
+
+    /** Constants used to calculate additional toppings and their cost */
+    static final double ADDITIONAL_TOPPINGS_COST = 1.49;
+
     public abstract double price();
 
-    public boolean addTopping(Topping topping)
-    {
-        if(this.toppings.contains(topping))
-        {
+    /**
+     * Adds a topping to the pizza.
+     * @return true if the toppings was added or not.
+     */
+    public boolean addTopping(Topping topping) {
+        if(this.toppings.contains(topping)) {
             return false;
         }
 
@@ -29,48 +45,51 @@ public abstract class Pizza
         return true;
     }
 
-    public boolean removeTopping(Topping topping)
-    {
-        if(this.toppings.contains(topping))
-        {
-
+    /**
+     * Removing a topping on the pizza.
+     * @return true if the toppings was removed or not.
+     */
+    public boolean removeTopping(Topping topping) {
+        if(this.toppings.contains(topping)) {
             this.toppings.remove(topping);
-
             return true;
         }
 
         return false;
     }
 
-    public void setSize(Size size)
-    {
+    /**
+     * Sets the size of the Pizza
+     * @param size the size of the pizza to be changed to.
+     */
+    public void setSize(Size size) {
         this.size = size;
     }
 
+    /**
+     * Retrieves the price of the pizza.
+     * @return the price of the pizza.
+     */
     public double getPrice(){
         return this.price;
     }
-    public double calculateSalesTax()
-    {
-        return 0;
-        //r
 
-    }
-
-
-
+    /**
+     * Retrieves the toppings list.
+     * @return the arraylist of the toppings.
+     */
     public ArrayList<Topping> getToppings() {
         return toppings;
     }
 
-    public double calculateSizeOfPizza()
-    {
+    /**
+     * Calculates the price of the pizza based on the size.
+     * @return the price cost of the size
+     */
+    public double calculateSizeOfPizza() {
         double sizeCost = 0;
 
-
-        //make this a whole method??
-        switch (this.size)
-        {
+        switch (this.size) {
             case Small:
                 sizeCost = 0;
                 break;
@@ -81,32 +100,25 @@ public abstract class Pizza
                 sizeCost += (SIZE_INCREASE_COST + SIZE_INCREASE_COST);
                 break;
         }
+
         return sizeCost;
     }
 
+    /**
+     * Overrides toString method to represent Pizza objects.
+     * @return a textual representation of the Pizza's information.
+     */
     @Override
-    public String toString()
-    {
+    public String toString() {
         String pizzaType = this.getClass().getSimpleName() + " Pizza";
         DecimalFormat df = new DecimalFormat("#,##0.00");
 
         String toppings = "";
 
-        for(int i = 0; i < this.toppings.size(); i++)
-        {
+        for(int i = 0; i < this.toppings.size(); i++) {
             toppings += this.toppings.get(i) + ", ";
         }
+
         return String.format("%s, %s$%s", pizzaType, toppings, df.format(this.price()));
-
     }
-    //add Toppings
-    //remove toppings
-
-    //check if no repeating tippings
-    //max toppings
-
-
-
-    //create toString
-
 }
