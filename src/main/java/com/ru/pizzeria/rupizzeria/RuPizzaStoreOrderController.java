@@ -4,7 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import java.io.File;
@@ -12,13 +12,16 @@ import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 import java.io.FileNotFoundException;
-import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.ResourceBundle;
 
-public class RuPizzaStoreOrderController implements Initializable
+
+/**
+ * RuPizzaStoreOrderController is a class that handles all the events driven by the I/O in the application
+ * involving Store Orders.
+ * @author Sharia Hussain, David Lam
+ */
+public class RuPizzaStoreOrderController
 {
 
     @FXML
@@ -40,23 +43,29 @@ public class RuPizzaStoreOrderController implements Initializable
 
     private StoreOrders storeOrders;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources)
-    {
-        //REMOVE THIS METHOD
-    }
 
+    /**
+     * Used to Information Share between the Main Menu.
+     * @param controller RuPizzeriaController reference
+     */
     public void setMainController(RuPizzeriaController controller)
     {
         this.mainController = controller;
     }
 
+    /**
+     * Psuedo-Initialize method required to pass information and initialize key information such
+     * as the list views and prices.
+     */
     public void safeInitialize()
     {
         this.storeOrders = mainController.getStoreOrder();
         populatePhoneNumber();
     }
 
+    /**
+     * Populates the combox box with all the phone numbers in store orders.
+     */
     private void populatePhoneNumber()
     {
         ArrayList<String> phoneNumbers = new ArrayList<String>();
@@ -70,6 +79,11 @@ public class RuPizzaStoreOrderController implements Initializable
         this.customerPhoneNumberComboBox.setItems(phoneNumbersList);
     }
 
+    /**
+     * Gets the phone number from the drop down and populates the list view with the current
+     * order's information.
+     * @param event the event object that is connected and responds to the UI component
+     */
     @FXML
     void setPhoneNumber(ActionEvent event)
     {
@@ -89,13 +103,14 @@ public class RuPizzaStoreOrderController implements Initializable
             orderTotalTextArea.setText(df.format(order.getTotalPrice()));
 
         }
-
-
         //update after removing order
-
     }
 
 
+    /**
+     * Cancels an order from the store order when Cancel Order is pressed.
+     * @param event the event object that is connected and responds to the UI component
+     */
     @FXML
     void cancelOrder(ActionEvent event)
     {
@@ -113,6 +128,10 @@ public class RuPizzaStoreOrderController implements Initializable
         //set new thing
     }
 
+    /**
+     * Opens Window to Navigate and Save an export of store orders to a file.
+     * @param event the event object that is connected and responds to the UI component
+     */
     @FXML
     void exportStoreOrders(ActionEvent event)
     {
@@ -129,12 +148,12 @@ public class RuPizzaStoreOrderController implements Initializable
         catch (FileNotFoundException e)
         {
             errorNoFileFound();
-
         }
-
-
     }
 
+    /**
+     * Shows alert box when there is an issue with a file object.
+     */
     private void errorNoFileFound()
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -142,13 +161,5 @@ public class RuPizzaStoreOrderController implements Initializable
         alert.setContentText("File was not found.");
         alert.showAndWait();
     }
-
-
-
-
-
-
-
-
 
 }

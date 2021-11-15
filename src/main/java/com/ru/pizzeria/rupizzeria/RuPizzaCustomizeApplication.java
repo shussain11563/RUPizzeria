@@ -7,8 +7,19 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class RuPizzaCustomizeApplication extends Application {
+/**
+ * This class is the driver class that performs the execution of the application with JavaFX.
+ * This class is responsible for loading and displaying the Pizza Customization View of the Pizzeria.
+ * @author Sharia Hussain, David Lam
+ */
+public class RuPizzaCustomizeApplication extends Application
+{
 
+    /**
+     * Method that runs the JavaFX loader commands and shows the applications.
+     * Loads and displays the Pizza Customization Scene.
+     * @param stage object to show the application
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(RuPizzeriaApplication.class.getResource("pizzeria-view.fxml"));
@@ -18,6 +29,10 @@ public class RuPizzaCustomizeApplication extends Application {
         stage.show();
     }
 
+    /**
+     * Method that launches the JavaFX applications
+     * @param args input arguments from command line
+     */
     public static void main(String[] args) {
         launch();
     }

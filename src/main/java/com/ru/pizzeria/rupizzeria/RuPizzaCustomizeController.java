@@ -14,6 +14,11 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.*;
 
+/**
+ * RuPizzaCustomizeController is a class that handles all the events driven by the I/O in the application
+ * involving Pizza Customization such as adding or removing toppings.
+ * @author Sharia Hussain, David Lam
+ */
 public class RuPizzaCustomizeController implements Initializable {
     /*
     Update Price when Adding/Removing Toppings
@@ -27,9 +32,6 @@ public class RuPizzaCustomizeController implements Initializable {
 
     private ArrayList<Topping> additionalToppings;
 
-    //private Order newOrder;
-
-    private String phoneNumber;
 
     private RuPizzeriaController mainController;
 
@@ -55,11 +57,19 @@ public class RuPizzaCustomizeController implements Initializable {
 
     private Order currentOrder;
 
+    /**
+     * Used to Information Share between the Main Menu.
+     * @param controller RuPizzeriaController reference
+     */
     public void setMainController(RuPizzeriaController controller)
     {
         mainController = controller;
     }
 
+    /**
+     * Sets the price when size of pizza is changed.
+     * @param event the event object that is connected and responds to the UI component.
+     */
     @FXML
     void selectPizzaSize(ActionEvent event) {
         Size selectedSize = myComboBox.getSelectionModel().getSelectedItem();
@@ -69,6 +79,9 @@ public class RuPizzaCustomizeController implements Initializable {
 
     }
 
+    /**
+     * Sets the price of the pizza to the text area.
+     */
     private void setPrice()
     {
         DecimalFormat df = new DecimalFormat("#,##0.00");
@@ -76,18 +89,23 @@ public class RuPizzaCustomizeController implements Initializable {
         priceTextArea.setEditable(false);
     }
 
+    /**
+     * Initalizes key elements before the scene is shown such as the Size Combo Box.
+     * @param location location
+     * @param resources resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-
-        //comboBox
         ObservableList<Size> options =  FXCollections.observableList(Arrays.asList(Size.values()));
         myComboBox.setItems(options);
         myComboBox.setValue(Size.Small);
-
     }
 
-
+    /**
+     * Psuedo-Initialize method required to pass information and initialize key information such
+     * as the list views and prices.
+     */
     public void safeInitialize()
     {
         this.currentOrder = mainController.getCurrentOrder();
@@ -105,30 +123,36 @@ public class RuPizzaCustomizeController implements Initializable {
 
     }
 
+    /**
+     * Sets the picture of the pizza in the view.
+     * @param image the image to set in the view
+     */
     public void setPizzaPicture(Image image)
     {
         this.pizzaImage.setImage(image);
     }
 
+    /**
+     * Sets the text of the pizza in the view.
+     * @param text the type of pizza, i.e. Deluxe, Pepperoni, Hawaiian
+     */
     public void setPizzaText(String text) {
         pizzaButton.setText(text);
     }
 
-    public void setPizzaPhoneNumber(String text) {
-        phoneNumber = text;
-    }
+
 
     //change this method
+
+    /**
+     * Adds the pizza to an order and resets the view.
+     * @param event the event object that is connected and responds to the UI component
+     * @throws IOException throw error regarding I/O failure
+     */
     @FXML
-    void addOrder(ActionEvent event)throws IOException
+    void addOrder(ActionEvent event) throws IOException
     {
-
         this.currentOrder.addPizza(this.pizza);
-
-        //newOrder.printAllOrders();
-        //pizza = PizzaMaker.createPizza(pizzaButton.getText());
-        // reset toppings clearView()
-
         String pizzaFlavor = pizzaButton.getText();
         Pizza pizza = PizzaMaker.createPizza(pizzaFlavor);
         this.pizza = pizza;
@@ -138,7 +162,9 @@ public class RuPizzaCustomizeController implements Initializable {
     }
 
 
-
+    /**
+     * Updates the List View of the toppings.
+     */
     public void updateListView()
     {
         selectedToppings = this.pizza.getToppings();
@@ -153,6 +179,11 @@ public class RuPizzaCustomizeController implements Initializable {
     }
 
     //make less redundant
+
+    /**
+     * Method that handles the removal of a topping including an alert box.
+     * @param event the event object that is connected and responds to the UI component
+     */
     @FXML
     void removeToppings(ActionEvent event)
     {
@@ -187,6 +218,9 @@ public class RuPizzaCustomizeController implements Initializable {
         }
     }
 
+    /**
+     * Shows alert box regarding removing an essential topping.
+     */
     public void showConfirmationRemoveEssentialToppings() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Warning with Removing Toppings");
@@ -198,6 +232,9 @@ public class RuPizzaCustomizeController implements Initializable {
         }
     }
 
+    /**
+     * Shows alert box when there is no toppings on pizza.
+     */
     public void showConfirmationNoToppingsOnPizza() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Warning with Removing Toppings");
@@ -206,6 +243,11 @@ public class RuPizzaCustomizeController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
     }
 
+    /**
+     * Removes Toppings to the Pizza.
+     * Adds topping to the pizza list view and removes them from the additional toppings view.
+     * Sets price of the pizza after an event.
+     */
     public void callRemoveToppings() {
         Topping topping = selectedToppingsListView.getSelectionModel().getSelectedItem();
         additionalToppingsListView.getItems().add(topping);
@@ -214,6 +256,12 @@ public class RuPizzaCustomizeController implements Initializable {
         setPrice();
     }
 
+    /**
+     * Adds Toppings to the Pizza.
+     * Adds topping to the pizza list view and removes them from the additional toppings view.
+     * Sets price of the pizza after an event.
+     * @param event the event object that is connected and responds to the UI component
+     */
     @FXML
     void addToppings(ActionEvent event)
     {
@@ -237,6 +285,12 @@ public class RuPizzaCustomizeController implements Initializable {
 
         }
     }
+
+    /**
+     * Checks whether a topping is essential for a Deluxe Pizza.
+     * @param selectedItem the topping that is either essential or not.
+     * @return true if essential, false otherwise
+     */
     public boolean checkDeluxeToppings(Topping selectedItem) {
         if(selectedItem.toString().equals("Sausage") || selectedItem.toString().equals("Onion")
                 || selectedItem.toString().equals("GreenPepper") || selectedItem.toString().equals("BlackOlives")
@@ -246,6 +300,11 @@ public class RuPizzaCustomizeController implements Initializable {
         return false;
     }
 
+    /**
+     * Checks whether a topping is essential for a Hawaiian Pizza.
+     * @param selectedItem the topping that is either essential or not.
+     * @return true if essential, false otherwise
+     */
     public boolean checkHawaiianToppings(Topping selectedItem) {
         if(selectedItem.toString().equals("Pineapple") || selectedItem.toString().equals("Ham")){
             return true;
@@ -253,6 +312,11 @@ public class RuPizzaCustomizeController implements Initializable {
         return false;
     }
 
+    /**
+     * Checks whether a topping is essential for a Pepperoni Pizza.
+     * @param selectedItem the topping that is either essential or not.
+     * @return true if essential, false otherwise
+     */
     public boolean checkPepperoniToppings(Topping selectedItem) {
         if(selectedItem.toString().equals("Pepperoni")) {
             return true;
