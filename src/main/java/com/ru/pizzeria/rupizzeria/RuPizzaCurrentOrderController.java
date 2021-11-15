@@ -124,13 +124,17 @@ public class RuPizzaCurrentOrderController {
             updatePrices();
         }
     }
-
+    /**
+     * Method that calls all the costs that need to be calculated
+     */
     private void processCost() {
         calculateSubtotal();
         calculateSalesTax();
         calculateOrderTotal();
     }
-
+    /**
+     * Updates the prices of the subtotal, salesTax, and orderTotal
+     */
     private void updatePrices() {
         setPhoneNumberTextArea(this.currentOrder.getPhoneNumber());
         setSubtotalTextArea(priceToString(subtotal));
@@ -138,12 +142,18 @@ public class RuPizzaCurrentOrderController {
         setOrderTotalTextArea(priceToString(orderTotal));
     }
 
+    /**
+     * Calls the remove pizza in the order and updates the list view
+     */
     public void callRemovePizza() {
         Pizza pizza = orderListView.getSelectionModel().getSelectedItem();
         orderListView.getItems().remove(pizza);
         this.currentOrder.removePizza(pizza);
     }
 
+    /**
+     * Alert box to an Error when removing the last pizza
+     */
     public void showNoPizzasInOrder() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Warning with Removing Pizzas From Order");
