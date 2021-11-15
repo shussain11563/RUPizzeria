@@ -27,6 +27,8 @@ public class Order
     public void addPizza(Pizza pizza)
     {
         this.pizzas.add(pizza);
+        System.out.println(pizza.price);
+
     }
 
     public void removePizza(Pizza pizza)

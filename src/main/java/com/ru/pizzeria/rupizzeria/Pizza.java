@@ -58,7 +58,7 @@ public abstract class Pizza
     }
 
     public double getPrice(){
-        return price;
+        return this.price;
     }
     public double calculateSalesTax()
     {

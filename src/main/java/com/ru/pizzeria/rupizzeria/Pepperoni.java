@@ -28,6 +28,7 @@ public class Pepperoni extends Pizza
         {
             runningCost += Pizza.ADDITIONAL_TOPPINGS_COST;
         }
+        this.price = runningCost;
 
         return runningCost;
 

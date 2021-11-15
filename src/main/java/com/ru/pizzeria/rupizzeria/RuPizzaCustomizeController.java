@@ -162,9 +162,8 @@ public class RuPizzaCustomizeController implements Initializable {
     @FXML
     void addOrder(ActionEvent event)throws IOException
     {
+
         this.currentOrder.addPizza(this.pizza);
-
-
 
         //newOrder.printAllOrders();
         //pizza = PizzaMaker.createPizza(pizzaButton.getText());
