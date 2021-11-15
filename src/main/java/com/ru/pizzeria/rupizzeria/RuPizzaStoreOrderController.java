@@ -13,6 +13,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -42,7 +43,7 @@ public class RuPizzaStoreOrderController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-
+        //REMOVE THIS METHOD
     }
 
     public void setMainController(RuPizzeriaController controller)
@@ -53,8 +54,6 @@ public class RuPizzaStoreOrderController implements Initializable
     public void safeInitialize()
     {
         this.storeOrders = mainController.getStoreOrder();
-
-        //make this a method, combo box
         populatePhoneNumber();
     }
 
@@ -62,9 +61,9 @@ public class RuPizzaStoreOrderController implements Initializable
     {
         ArrayList<String> phoneNumbers = new ArrayList<String>();
         ArrayList<Order> orders = this.storeOrders.getOrders();
+
         for(int i = 0; i < orders.size(); i++)
         {
-            System.out.println(i + ": " + orders.get(i).getPhoneNumber());
             phoneNumbers.add(orders.get(i).getPhoneNumber());
         }
         ObservableList<String> phoneNumbersList = FXCollections.observableArrayList(phoneNumbers);
@@ -74,11 +73,23 @@ public class RuPizzaStoreOrderController implements Initializable
     @FXML
     void setPhoneNumber(ActionEvent event)
     {
+        this.storeOrderListView.getItems().clear();
         String phoneNumber = this.customerPhoneNumberComboBox.getSelectionModel().getSelectedItem();
-        Order order = this.storeOrders.find(phoneNumber);
+        if(phoneNumber != null)
+        {
+            Order order = this.storeOrders.find(phoneNumber);
+            this.storeOrderListView.getItems().clear();
 
-        ObservableList<Pizza> pizzasList = FXCollections.observableArrayList(order.getPizzas());
-        this.storeOrderListView.setItems(FXCollections.observableList(pizzasList));
+
+
+            ObservableList<Pizza> pizzasList = FXCollections.observableArrayList(order.getPizzas());
+            this.storeOrderListView.setItems(FXCollections.observableList(pizzasList));
+
+            DecimalFormat df = new DecimalFormat("#,##0.00");
+            orderTotalTextArea.setText(df.format(order.getTotalPrice()));
+
+        }
+
 
         //update after removing order
 
@@ -95,6 +106,7 @@ public class RuPizzaStoreOrderController implements Initializable
         this.storeOrderListView.getItems().clear();
 
         populatePhoneNumber();
+        this.orderTotalTextArea.clear();
 
         //update
 
@@ -109,10 +121,10 @@ public class RuPizzaStoreOrderController implements Initializable
         chooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"),
                 new ExtensionFilter("All Files", "*.*"));
         Stage stage = new Stage();
-        File targeFile = chooser.showSaveDialog(stage); //get the reference of the target file
+        File targetFile = chooser.showSaveDialog(stage); //get the reference of the target file
         try
         {
-            this.storeOrders.export(targeFile);
+            this.storeOrders.export(targetFile);
         }
         catch (FileNotFoundException e)
         {

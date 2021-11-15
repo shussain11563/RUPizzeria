@@ -22,18 +22,8 @@ public abstract class Pizza
     {
         if(this.toppings.contains(topping))
         {
-            printAllToppings();
-
             return false;
         }
-
-        /*
-        if(MAX_TOPPINGS == this.toppings.size())
-        {
-            return false;
-        }
-
-         */
 
         this.toppings.add(topping);
         return true;
@@ -67,13 +57,7 @@ public abstract class Pizza
 
     }
 
-    public void printAllToppings() {
-        for(int i = 0; i < toppings.size(); i++) {
-            System.out.print(toppings.get(i));
-        }
-        System.out.println();
 
-    }
 
     public ArrayList<Topping> getToppings() {
         return toppings;
@@ -97,9 +81,6 @@ public abstract class Pizza
                 sizeCost += (SIZE_INCREASE_COST + SIZE_INCREASE_COST);
                 break;
         }
-
-
-
         return sizeCost;
     }
 

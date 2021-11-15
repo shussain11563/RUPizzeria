@@ -1,10 +1,14 @@
 package com.ru.pizzeria.rupizzeria;
 
+import java.util.Arrays;
+
 public class Deluxe extends Pizza {
     private static final double MIN_COST = 12.99;
     private static final int MIN_TOPPING = 5;
 
     public Deluxe() {
+
+        //this.toppings = Arrays.asList(Topping.Sausage,Topping.Onion,)
         //use collection
         //make it a one liner
         this.toppings.add(Topping.Sausage);
@@ -13,6 +17,8 @@ public class Deluxe extends Pizza {
         this.toppings.add(Topping.BlackOlives);
         this.toppings.add(Topping.DicedTomatoes);
         this.size = Size.Small;
+
+        //List<String> places = Arrays.asList("Buenos Aires", "Córdoba", "La Plata");
     }
 
     @Override
@@ -34,11 +40,6 @@ public class Deluxe extends Pizza {
         return runningCost;
     }
 
-    public static void main(String[] args)
-    {
-        Pizza pizza = new Deluxe();
-        System.out.println(pizza);
-    }
 
 
 }

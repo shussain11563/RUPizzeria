@@ -109,25 +109,12 @@ public class RuPizzeriaController implements Initializable {
          */
     }
 
-    /*
-    //NOT FOUND
-    private boolean orderInStoreOrder(String phoneNumber)
+    public void setCurrentOrder(Order order)
     {
-        ArrayList<Order> orders = this.storeOrders.getOrders();
-        for(int i = 0; i < orders.size() ; i++)
-        {
-            if(orders.get(i).getPhoneNumber().equals(phoneNumber))
-            {
-                return true;
-                //System.out.println()
-            }
-        }
-
-        return false;
-
+        this.currentOrder = order;
     }
 
-     */
+
 
 
     public void openPizzaCustomizationView(String pizzaText, Image pizzaImage) throws IOException
@@ -176,18 +163,19 @@ public class RuPizzeriaController implements Initializable {
 
          */
        //remove the redundandant code from my implementation
+        if(this.storeOrders.find(customerPhoneNumber.getText().trim())!=null)
+        {
+
+            errorDuplicatePhoneNumber();
+            return;
+        }
+
         boolean isValid = checkPhoneNumber(customerPhoneNumber.getText().trim());
         boolean isSameNumber = this.currentOrder != null && (this.currentOrder.getPhoneNumber().equals(customerPhoneNumber.getText().trim()));
 
         if(this.currentOrder == null || (isValid == true && isSameNumber == false))
         {
-
-            System.out.println(this.currentOrder == null);
-            System.out.println((isValid == true && isSameNumber == false));
-
-
             this.currentOrder = new Order(this.customerPhoneNumber.getText().trim());
-            System.out.println("Are we resetting?");
 
         }
 
@@ -207,20 +195,14 @@ public class RuPizzeriaController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pizza-customize-view.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 RuPizzaCustomizeController setController = fxmlLoader.getController();
-
                 setController.setMainController(this);
-
                 setController.setPizzaText(pizzaText);
                 setController.setPizzaPicture(pizzaImage);
-                //setController.setPizzaPhoneNumber(customerPhoneNumber.getText());
-
-                setController.safeInitialize(); //safe initalizerTest
-
+                setController.safeInitialize();
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root, 900, 700));
                 stage.setTitle("Store Orders");
                 stage.show();
-
             }
 
         }
@@ -254,6 +236,15 @@ public class RuPizzeriaController implements Initializable {
         openPizzaCustomizationView("Pepperoni Pizza", pepperoniImage.getImage());
     }
 
+    private void errorDuplicatePhoneNumber()
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error with Phone Number");
+        alert.setContentText("Phone Number Has Already Ordered");
+        alert.showAndWait();
+    }
+
+
     private void errorInvalidPhoneNumberAlert()
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -266,7 +257,7 @@ public class RuPizzeriaController implements Initializable {
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error with Current Order");
-        alert.setContentText("There is not current order.");
+        alert.setContentText("There is no current order.");
         alert.showAndWait();
     }
 

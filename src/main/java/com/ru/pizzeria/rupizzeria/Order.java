@@ -6,14 +6,23 @@ public class Order
 {
     private String phoneNumber;
     private ArrayList<Pizza> pizzas;
+    private double totalPrice;
 
     public Order(String phoneNumber)
     {
-        //contains an order number
         this.phoneNumber = phoneNumber;
         pizzas = new ArrayList<Pizza>();
-        System.out.println(phoneNumber);
+        totalPrice = 0;
 
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public double getTotalPrice()
+    {
+        return this.totalPrice;
     }
 
     public ArrayList<Pizza> getPizzas() {
@@ -29,7 +38,6 @@ public class Order
     public void addPizza(Pizza pizza)
     {
         this.pizzas.add(pizza);
-        System.out.println(pizza.price);
 
     }
 
@@ -39,26 +47,4 @@ public class Order
     }
 
 
-    /*
-    public void printAllOrders() {
-        for(int i = 0; i < pizzas.size(); i++) {
-            System.out.print(i + ": ");
-            System.out.print(pizzas.get(i).price + " ");
-        }
-    }
-
-    @Override
-    public String toString()
-    {
-        String pizzas = "";
-        for(int i = 0; i < this.pizzas.size(); i++)
-        {
-            pizzas += this.pizzas.get(i).toString() + "\n";
-
-        }
-
-        return pizzas;
-    }
-
-     */
 }
