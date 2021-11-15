@@ -4,18 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-
-import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.ResourceBundle;
+
 
 public class RuPizzaCurrentOrderController {
 
-    Order currentOrder;
+    private Order currentOrder;
 
     @FXML
     private TextArea customerPhoneNumber;
@@ -40,10 +37,18 @@ public class RuPizzaCurrentOrderController {
     private double orderTotal;
     private double subtotal;
 
+    /**
+     * Used to Information Share between the Main Menu.
+     * @param controller RuPizzeriaController reference
+     */
     public void setMainController(RuPizzeriaController controller) {
         mainController = controller;
     }
 
+    /**
+     * Psuedo-Initialize method required to pass information and initialize key information such
+     * as the list views and prices.
+     */
     public void safeInitialize() {
         this.currentOrder = mainController.getCurrentOrder();
         this.storeOrders = mainController.getStoreOrder();
@@ -54,6 +59,9 @@ public class RuPizzaCurrentOrderController {
         updatePrices();
     }
 
+    /**
+     * Resets the Text Areas of the Scene and Resets the Order.
+     */
     private void clear() {
         this.salesTaxTextArea.clear();
         this.subtotalTextArea.clear();
@@ -65,11 +73,18 @@ public class RuPizzaCurrentOrderController {
         this.mainController.setCurrentOrder(null);
     }
 
+    /**
+     * Calculates the order total of all the pizzas using the
+     * subtotal and the sales tax.
+     */
     public void calculateOrderTotal() {
         this.orderTotal = this.subtotal + this.salesTax;
         this.currentOrder.setTotalPrice(this.orderTotal);
     }
 
+    /**
+     * Calculates the subtotal of all the pizzas in the current order.
+     */
     public void calculateSubtotal() {
         double subtotal = 0;
 
@@ -81,37 +96,68 @@ public class RuPizzaCurrentOrderController {
         this.subtotal = subtotal;
     }
 
+    /**
+     * Calculates the sales tax of the order.
+     */
     public void calculateSalesTax() {
         this.salesTax = (Pizza.SALES_TAX_RATE/100) * subtotal;
     }
 
+    /**
+     * Truncates and rounds a double and puts them in a string.
+     * @param value the value to truncate and represent in currency form.
+     * @return string representation of the value in currency form.
+     */
     public String priceToString(double value) {
         DecimalFormat df = new DecimalFormat("#,##0.00");
         return String.format("$%s", df.format(value));
     }
 
+    /**
+     * Prints the phone number into the text area.
+     * @param phoneNumber the phone number of the order
+     */
     public void setPhoneNumberTextArea(String phoneNumber) {
         customerPhoneNumber.setText(phoneNumber);
     }
 
+    /**
+     * Prints the subtotal into the text area.
+     * @param subtotal the string representation of the subtotal of the order.
+     */
     public void setSubtotalTextArea(String subtotal) {
         subtotalTextArea.setText(subtotal);
     }
 
+    /**
+     * Prints the sales tax total into the text area.
+     * @param salesTax the string representation of the sales tax of the order.
+     */
     public void setSalesTaxTextArea(String salesTax) {
         salesTaxTextArea.setText(salesTax);
     }
-    
+
+    /**
+     * Prints the order total into the text area.
+     * @param total the total price of the order.
+     */
     public void setOrderTotalTextArea(String total) {
         orderTotalTextArea.setText(total);
     }
 
-
+    /**
+     * Method that places an order into store order.
+     * @param event the event object that is connected and responds to the UI component
+     */
     @FXML
     void placeOrder(ActionEvent event) {
         showConfirmationForOrderToBePlaced();
     }
 
+    /**
+     * Method that removes the selected pizza and recalculates costs and prices.
+     * @param event the event object that is connected and responds to the UI component.
+     */
     @FXML
     void removeSelectedPizza(ActionEvent event) {
         if(orderListView.getSelectionModel().getSelectedItem() != null) {
@@ -152,7 +198,7 @@ public class RuPizzaCurrentOrderController {
     }
 
     /**
-     * Alert box to an Error when removing the last pizza
+     * Alert box when removing the last pizza
      */
     public void showNoPizzasInOrder() {
         Alert alert = new Alert(Alert.AlertType.ERROR);

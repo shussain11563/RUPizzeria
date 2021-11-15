@@ -13,10 +13,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * RuPizzeriaController is a class that handles all the events driven by the I/O in the application.
+ * @author Sharia Hussain, David Lam
+ */
 public class RuPizzeriaController implements Initializable {
     @FXML
     private Button deluxePizzaButton;
@@ -43,26 +46,31 @@ public class RuPizzeriaController implements Initializable {
 
     private Order currentOrder;
 
+    /**
+     * Initalizes key elements before the scene is shown such as StoreOrder.
+     * @param location location
+     * @param resources resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-
         this.storeOrders = new StoreOrders();
-        //pizzaImageViewTest.getImage();
-        //Order orderTest = new Order("11111144444");
-
-        //order
-        //initialize
-
-        //getter
-
     }
 
+    /**
+     * Returns the StoreOrder.
+     * @return the current store order
+     */
     public StoreOrders getStoreOrder()
     {
         return this.storeOrders;
     }
 
+    /**
+     * Opens the Current Order Window View.
+     * @param event the event object that is connected and responds to the UI component
+     * @throws IOException throw error regarding I/O failure
+     */
     @FXML
     void openCurrentOrdersWindow(ActionEvent event) throws IOException {
         if(this.currentOrder != null) {
@@ -80,118 +88,63 @@ public class RuPizzeriaController implements Initializable {
         }else {
             errorNoCurrentOrderAlert();
         }
-
-
     }
 
+    /**
+     * Opens the Store Order Window View.
+     * @param event the event object that is connected and responds to the UI component
+     * @throws IOException throw error regarding I/O failure
+     */
     @FXML
     void openManageStoreOrdersWindow(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("store-orders-view.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         RuPizzaStoreOrderController setController = fxmlLoader.getController();
-
         setController.setMainController(this);
         setController.safeInitialize();
-
         Stage stage = new Stage();
         stage.setScene(new Scene(root, 900, 700));
         stage.setTitle("Store Orders");
         stage.show();
-
-        /*
-
-                setController.setPizzaText(pizzaText);
-                setController.setPizzaPicture(pizzaImage);
-                //setController.setPizzaPhoneNumber(customerPhoneNumber.getText());
-
-                setController.safeInitialize(); //safe initalizerTest
-
-         */
     }
 
+    /**
+     * Setter method that sets the current order.
+     * @param order the order to set.
+     */
     public void setCurrentOrder(Order order)
     {
         this.currentOrder = order;
     }
 
 
-
-
-    public void openPizzaCustomizationView(String pizzaText, Image pizzaImage) throws IOException
-    {
-        //if a new phone number is defined in the text field, create new order
-        //check through store orders
-
-        //hypothetical
-        //we have 123-456-7890 and they put 7 pizzas into Order foo
-        //but they do not order it
-        // option 1 - keep the order up because the number is still up
-        // option 2 -  a new number is put up, we reset the order
-        // option 2 elegant, we check through storeOrder and see if it is not defined
-        //option 2 elegant refined, everytime a new phone number is entered, we check store number and do elegant 2
-
-        //problem with option 2 elegant
-
-        // lets say 123-456-7890 put 7 pizzas in Order foo but the order was not placed
-        // now lets say we put 1234567892 and get 7 orders
-
-        //but how would we order the 7 pizzas without reset the order
-
-        //chaneg th
-
-        /*
-        if order is null or is a new phone number
-        --> create/reinstantiate order
-
-
-
-         */
-
-
-
-        /*
-        if(!orderInStoreOrder(customerPhoneNumber.getText().trim()))
-        {
-            //check order too and see if its alreayd instantiated, maybet his method is not neccessary
-
-            //reinstantiate
-
-
-        }
-
-        //
-
-         */
-       //remove the redundandant code from my implementation
-        if(this.storeOrders.find(customerPhoneNumber.getText().trim())!=null)
-        {
-
+    /**
+     * Handles processing the customization view and handles the creation of the order.
+     * @param pizzaText the type of pizza to order
+     * @param pizzaImage the image of the pizza to order
+     * @throws IOException throw error regarding I/O failure
+     */
+    public void openPizzaCustomizationView(String pizzaText, Image pizzaImage) throws IOException {
+        if(this.storeOrders.find(customerPhoneNumber.getText().trim())!=null) {
             errorDuplicatePhoneNumber();
             return;
         }
-
         boolean isValid = checkPhoneNumber(customerPhoneNumber.getText().trim());
         boolean isSameNumber = this.currentOrder != null && (this.currentOrder.getPhoneNumber().equals(customerPhoneNumber.getText().trim()));
 
-        if(this.currentOrder == null || (isValid == true && isSameNumber == false))
-        {
+        if(this.currentOrder == null || (isValid == true && isSameNumber == false)) {
             this.currentOrder = new Order(this.customerPhoneNumber.getText().trim());
-
         }
-
-        //we might need our store order method we deleteed to see if a duplicate phone number is being entered
 
         if(checkPhoneNumber(customerPhoneNumber.getText().trim()))
         {
-
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
             alert.setHeaderText("Pizza Order");
             alert.setContentText("Click to Continue with Order");
 
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK)
-            {
+            if (result.get() == ButtonType.OK) {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pizza-customize-view.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 RuPizzaCustomizeController setController = fxmlLoader.getController();
@@ -204,38 +157,58 @@ public class RuPizzeriaController implements Initializable {
                 stage.setTitle("Store Orders");
                 stage.show();
             }
-
         }
         else
         {
             errorInvalidPhoneNumberAlert();
         }
-
-
     }
 
+    /**
+     * Getter method that returns the current order.
+     * @return currentOrder, the current active order
+     */
     public Order getCurrentOrder() {
         return currentOrder;
     }
 
+    /**
+     * Opens the Pizza Customization View to customize pizza for a Deluxe Pizza.
+     * @param event the event object that is connected and responds to the UI component
+     * @throws IOException throw error regarding I/O failure
+     */
     @FXML
     void openDeluxeCustomizePizzaWindow(ActionEvent event) throws IOException
     {
         openPizzaCustomizationView("Deluxe Pizza", deluxeImage.getImage());
     }
 
+    /**
+     * Opens the Pizza Customization View to customize pizza for a Hawaiian Pizza.
+     * @param event the event object that is connected and responds to the UI component
+     * @throws IOException throw error regarding I/O failure
+     */
     @FXML
     void openHawaiianCustomizePizzaWindow(ActionEvent event) throws IOException
     {
         openPizzaCustomizationView("Hawaiian Pizza", hawaiianImage.getImage());
     }
 
+    /**
+     * Opens the Pizza Customization View to customize pizza for a Pepperoni Pizza.
+     * @param event the event object that is connected and responds to the UI component
+     * @throws IOException throw error regarding I/O failure
+     */
     @FXML
     void openPepperoniCustomizePizzaWindow(ActionEvent event) throws IOException
     {
         openPizzaCustomizationView("Pepperoni Pizza", pepperoniImage.getImage());
     }
 
+    /**
+     * Shows alert box when there is a phone number that already ordered
+     * tries to order again.
+     */
     private void errorDuplicatePhoneNumber()
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -244,7 +217,9 @@ public class RuPizzeriaController implements Initializable {
         alert.showAndWait();
     }
 
-
+    /**
+     * Shows alert box when there is a phone number that is invalid.
+     */
     private void errorInvalidPhoneNumberAlert()
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -253,6 +228,9 @@ public class RuPizzeriaController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Displays alert box when manipulating an order that does not exist.
+     */
     private void errorNoCurrentOrderAlert()
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -261,6 +239,11 @@ public class RuPizzeriaController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Validates whether a phoneNumber is valid or not.
+     * @param text the phone number from the total text area.
+     * @return true if a phone number is valid, false otherwise.
+     */
     private static boolean checkPhoneNumber(String text)
     {
         if(text.length() != 10)
@@ -279,13 +262,5 @@ public class RuPizzeriaController implements Initializable {
 
     }
 
-
-    //??
-    /*
-    public void setCurrentOrder(Order newOrder) {
-        currentOrder = newOrder;
-    }
-
-     */
 
 }
