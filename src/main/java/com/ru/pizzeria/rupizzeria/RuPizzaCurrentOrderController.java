@@ -41,8 +41,6 @@ public class RuPizzaCurrentOrderController implements Initializable
 
     private RuPizzeriaController mainController;
 
-    private Order order;
-
     private StoreOrders storeOrders;
 
     private double salesTax;
@@ -134,7 +132,9 @@ public class RuPizzaCurrentOrderController implements Initializable
     @FXML
     void placeOrder(ActionEvent event) {
         showConfirmationForOrderToBePlaced();
+
     }
+
 
     private void processCost() {
         calculateSubtotal();
@@ -184,7 +184,7 @@ public class RuPizzaCurrentOrderController implements Initializable
             alert.setContentText("You are about to place an order");
             Optional<ButtonType> result = alert.showAndWait();
             if(result.get() == ButtonType.OK) {
-                this.storeOrders.addOrder(this.order);
+                this.storeOrders.addOrder(this.currentOrder);
                 clear();
             }
         }else {
