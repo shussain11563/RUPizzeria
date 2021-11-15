@@ -141,9 +141,16 @@ public class RuPizzaCustomizeController implements Initializable {
     }
 
 
-
-    //change this method
-
+    /**
+     * Method that alerts users that their pizza is added to their order.
+     */
+    public void addToOrderAlertBox() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Added to Order");
+        alert.setHeaderText("Order");
+        alert.setContentText("Added to Order!");
+        Optional<ButtonType> result = alert.showAndWait();
+    }
     /**
      * Adds the pizza to an order and resets the view.
      * @param event the event object that is connected and responds to the UI component
@@ -152,6 +159,7 @@ public class RuPizzaCustomizeController implements Initializable {
     @FXML
     void addOrder(ActionEvent event) throws IOException
     {
+        //add alert box
         this.currentOrder.addPizza(this.pizza);
         String pizzaFlavor = pizzaButton.getText();
         Pizza pizza = PizzaMaker.createPizza(pizzaFlavor);
@@ -159,6 +167,7 @@ public class RuPizzaCustomizeController implements Initializable {
         updateListView();
         setPrice();
         myComboBox.setValue(Size.Small);
+        addToOrderAlertBox();
     }
 
 
