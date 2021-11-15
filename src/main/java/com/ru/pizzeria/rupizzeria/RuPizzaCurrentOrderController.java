@@ -13,8 +13,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class RuPizzaCurrentOrderController implements Initializable
-{
+public class RuPizzaCurrentOrderController {
 
     Order currentOrder;
 
@@ -23,12 +22,6 @@ public class RuPizzaCurrentOrderController implements Initializable
 
     @FXML
     private ListView<Pizza> orderListView;
-
-    @FXML
-    private Button placeOrderButton;
-
-    @FXML
-    private Button removeSelectedPizzaButton;
 
     @FXML
     private TextArea salesTaxTextArea;
@@ -47,47 +40,29 @@ public class RuPizzaCurrentOrderController implements Initializable
     private double orderTotal;
     private double subtotal;
 
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    }
-
-    public void setMainController(RuPizzeriaController controller)
-    {
+    public void setMainController(RuPizzeriaController controller) {
         mainController = controller;
     }
 
-    public void safeInitialize()
-    {
+    public void safeInitialize() {
         this.currentOrder = mainController.getCurrentOrder();
         this.storeOrders = mainController.getStoreOrder();
 
-        //listview
         ObservableList<Pizza> pizzasList = FXCollections.observableArrayList(this.currentOrder.getPizzas());
         this.orderListView.setItems(FXCollections.observableList(pizzasList));
         processCost();
         updatePrices();
     }
 
-    private void clear()
-    {
-        //make a private method that forced textArea to be uneditable
+    private void clear() {
         this.salesTaxTextArea.clear();
         this.subtotalTextArea.clear();
         this.orderTotalTextArea.clear();
         this.customerPhoneNumber.clear();
 
-
-        //this.salesTaxTextArea.setDisable(true);
-        //this.customerPhoneNumber.setDisable(true);
-        //this.orderTotalTextArea.setDisable(true);
-        //this.customerPhoneNumber.setDisable(true);
-
         this.orderListView.getItems().clear();
         this.currentOrder = null; //???
         this.mainController.setCurrentOrder(null);
-        //experiment on line 88
-
     }
 
     public void calculateOrderTotal() {
@@ -135,36 +110,8 @@ public class RuPizzaCurrentOrderController implements Initializable
     @FXML
     void placeOrder(ActionEvent event) {
         showConfirmationForOrderToBePlaced();
-
-        /*
-        this.currentOrder = null;
-
-        if(this.currentOrder == null)
-        {
-            System.out.println("This is null!  ----->");
-        }
-
-        if(mainController.getCurrentOrder() == null)
-        {
-            System.out.println("This is null!  line 57");
-        }
-
-         */
-
     }
 
-
-    private void processCost() {
-        calculateSubtotal();
-        calculateSalesTax();
-        calculateOrderTotal();
-    }
-    private void updatePrices() {
-        setPhoneNumberTextArea(this.currentOrder.getPhoneNumber());
-        setSubtotalTextArea(priceToString(subtotal));
-        setSalesTaxTextArea(priceToString(salesTax));
-        setOrderTotalTextArea(priceToString(orderTotal));
-    }
     @FXML
     void removeSelectedPizza(ActionEvent event) {
         if(orderListView.getSelectionModel().getSelectedItem() != null) {
@@ -176,8 +123,19 @@ public class RuPizzaCurrentOrderController implements Initializable
             processCost();
             updatePrices();
         }
+    }
 
+    private void processCost() {
+        calculateSubtotal();
+        calculateSalesTax();
+        calculateOrderTotal();
+    }
 
+    private void updatePrices() {
+        setPhoneNumberTextArea(this.currentOrder.getPhoneNumber());
+        setSubtotalTextArea(priceToString(subtotal));
+        setSalesTaxTextArea(priceToString(salesTax));
+        setOrderTotalTextArea(priceToString(orderTotal));
     }
 
     public void callRemovePizza() {
@@ -194,6 +152,9 @@ public class RuPizzaCurrentOrderController implements Initializable
         Optional<ButtonType> result = alert.showAndWait();
     }
 
+    /**
+     * Alert box to show a confirmation when the order is to be placed
+     */
     public void showConfirmationForOrderToBePlaced() {
         if(this.currentOrder != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -208,11 +169,12 @@ public class RuPizzaCurrentOrderController implements Initializable
         }else {
             errorNoCurrentOrderAlert();
         }
-
     }
 
-    private void errorNoCurrentOrderAlert()
-    {
+    /**
+     * Alert box when there is no Current Order to be Placed
+     */
+    private void errorNoCurrentOrderAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error with Current Order");
         alert.setContentText("There is not current order.");
