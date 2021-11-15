@@ -36,7 +36,7 @@ public class RuPizzaStoreOrderController implements Initializable
     private TextArea orderTotalTextArea;
 
     @FXML
-    private ListView<Order> storeOrderListView;
+    private ListView<Pizza> storeOrderListView;
 
     private RuPizzeriaController mainController;
 
@@ -57,7 +57,12 @@ public class RuPizzaStoreOrderController implements Initializable
     {
         this.storeOrders = mainController.getStoreOrder();
 
-        //make this a method
+        //make this a method, combo box
+        populatePhoneNumber();
+    }
+
+    private void populatePhoneNumber()
+    {
         ArrayList<String> phoneNumbers = new ArrayList<String>();
         ArrayList<Order> orders = this.storeOrders.getOrders();
         for(int i = 0; i < orders.size(); i++)
@@ -66,23 +71,36 @@ public class RuPizzaStoreOrderController implements Initializable
         }
         ObservableList<String> phoneNumbersList = FXCollections.observableArrayList(phoneNumbers);
         this.customerPhoneNumberComboBox.setItems(phoneNumbersList);
+    }
 
-        //make the first phone number one default
-        //combo box menu
+    @FXML
+    void setPhoneNumber(ActionEvent event)
+    {
+        String phoneNumber = this.customerPhoneNumberComboBox.getSelectionModel().getSelectedItem();
+        Order order = this.storeOrders.find(phoneNumber);
 
-        /*
-        ObservableList<Size> options =  FXCollections.observableList(Arrays.asList(Size.values()));
-        myComboBox.setItems(options);
-        myComboBox.setValue(Size.Small); //default value
-        *
-         */
+        ObservableList<Pizza> pizzasList = FXCollections.observableArrayList(order.getPizzas());
+        this.storeOrderListView.setItems(FXCollections.observableList(pizzasList));
+
+        //update after removing order
+
     }
 
 
     @FXML
     void cancelOrder(ActionEvent event)
     {
+        String phoneNumber = this.customerPhoneNumberComboBox.getSelectionModel().getSelectedItem();
 
+        storeOrders.removeOrder(storeOrders.find(phoneNumber));
+
+        this.storeOrderListView.getItems().clear();
+
+        populatePhoneNumber();
+
+        //update
+
+        //set new thing
     }
 
     @FXML
