@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 public class RuPizzaCurrentOrderController implements Initializable
 {
-    static final double SALES_TAX_RATE = 0.0625;
+
     Order currentOrder;
 
     @FXML
@@ -84,12 +84,15 @@ public class RuPizzaCurrentOrderController implements Initializable
         //this.customerPhoneNumber.setDisable(true);
 
         this.orderListView.getItems().clear();
-        this.currentOrder = null;
+        this.currentOrder = null; //???
+        this.mainController.setCurrentOrder(null);
+        //experiment on line 88
 
     }
 
     public void calculateOrderTotal() {
         this.orderTotal = this.subtotal + this.salesTax;
+        this.currentOrder.setTotalPrice(this.orderTotal);
     }
 
     public void calculateSubtotal() {
@@ -104,7 +107,7 @@ public class RuPizzaCurrentOrderController implements Initializable
     }
 
     public void calculateSalesTax() {
-        this.salesTax = SALES_TAX_RATE * subtotal;
+        this.salesTax = (Pizza.SALES_TAX_RATE/100) * subtotal;
     }
 
     public String priceToString(double value) {
@@ -132,6 +135,21 @@ public class RuPizzaCurrentOrderController implements Initializable
     @FXML
     void placeOrder(ActionEvent event) {
         showConfirmationForOrderToBePlaced();
+
+        /*
+        this.currentOrder = null;
+
+        if(this.currentOrder == null)
+        {
+            System.out.println("This is null!  ----->");
+        }
+
+        if(mainController.getCurrentOrder() == null)
+        {
+            System.out.println("This is null!  line 57");
+        }
+
+         */
 
     }
 
