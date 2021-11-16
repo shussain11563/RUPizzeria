@@ -161,14 +161,19 @@ public class RuPizzaCurrentOrderController {
     @FXML
     void removeSelectedPizza(ActionEvent event) {
         if(orderListView.getSelectionModel().getSelectedItem() != null) {
-            if(orderListView.getItems().size() > 1) {
+            if(orderListView.getItems().size() > 0) {
                 callRemovePizza();
-            }else {
+            }
+            else {
                 showNoPizzasInOrder();
             }
             processCost();
             updatePrices();
         }
+        else {
+            showNoPizzasSelected();
+        }
+
     }
     /**
      * Method that calls all the costs that need to be calculated
@@ -204,15 +209,27 @@ public class RuPizzaCurrentOrderController {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Warning with Removing Pizzas From Order");
         alert.setHeaderText("Removing Pizzas");
-        alert.setContentText("You are removing the last Pizza in the Order");
+        alert.setContentText("There are no pizzas in the order!");
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
+    /**
+     * Alert box when no pizza is selected
+     */
+    public void showNoPizzasSelected() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Warning with Removing Pizzas From Order");
+        alert.setHeaderText("Removing Pizzas");
+        alert.setContentText("No pizzas selected!");
         Optional<ButtonType> result = alert.showAndWait();
     }
 
     /**
      * Alert box to show a confirmation when the order is to be placed
      */
-    public void showConfirmationForOrderToBePlaced() {
-        if(this.currentOrder != null) {
+    public void showConfirmationForOrderToBePlaced()
+    {
+        if(this.currentOrder != null && this.currentOrder.getPizzas().size() > 0) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Warning with Placing Order");
             alert.setHeaderText("Place the order");
@@ -233,7 +250,7 @@ public class RuPizzaCurrentOrderController {
     private void errorNoCurrentOrderAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error with Current Order");
-        alert.setContentText("There is not current order.");
+        alert.setContentText("No current order or there is no pizzas in the current order.");
         alert.showAndWait();
     }
 }

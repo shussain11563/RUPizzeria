@@ -106,6 +106,15 @@ public class RuPizzaStoreOrderController
         //update after removing order
     }
 
+    /**
+     * Alert box when there is no Current Order to be cancelled
+     */
+    private void errorCannotCancelOrder() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error with Cancelling Order");
+        alert.setContentText("No Order Selected to Cancel");
+        alert.showAndWait();
+    }
 
     /**
      * Cancels an order from the store order when Cancel Order is pressed.
@@ -120,6 +129,10 @@ public class RuPizzaStoreOrderController
         if(order!=null)
         {
             storeOrders.removeOrder(storeOrders.find(phoneNumber));
+        }
+        else
+        {
+            errorCannotCancelOrder();
         }
 
 
