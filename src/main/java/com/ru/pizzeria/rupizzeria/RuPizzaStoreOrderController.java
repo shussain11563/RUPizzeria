@@ -116,7 +116,12 @@ public class RuPizzaStoreOrderController
     {
         String phoneNumber = this.customerPhoneNumberComboBox.getSelectionModel().getSelectedItem();
 
-        storeOrders.removeOrder(storeOrders.find(phoneNumber));
+        Order order = storeOrders.find(phoneNumber);
+        if(order!=null)
+        {
+            storeOrders.removeOrder(storeOrders.find(phoneNumber));
+        }
+
 
         this.storeOrderListView.getItems().clear();
 

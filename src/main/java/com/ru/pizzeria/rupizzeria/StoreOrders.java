@@ -1,16 +1,16 @@
 package com.ru.pizzeria.rupizzeria;
-/**
- * StoreOrders is the class that all the orders for the company.
- * Contains constructors and methods for setting, getting, and manipulating
- * orders in the StoreOrder.
- * @author Sharia Hussain, David Lam
- */
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+/**
+ * StoreOrders is the class that all the orders for the company.
+ * Contains constructors and methods for setting, getting, and manipulating
+ * orders in the StoreOrder.
+ * @author Sharia Hussain, David Lam
+ */
 public class StoreOrders {
     private ArrayList<Order> orders;
 
@@ -53,6 +53,10 @@ public class StoreOrders {
      */
     public void export(File file) throws FileNotFoundException
     {
+        if(file == null)
+        {
+            throw new FileNotFoundException();
+        }
         PrintWriter printWriter = new PrintWriter(file);
         printWriter.println("----------- STORE ORDERS -----------\n");
 
