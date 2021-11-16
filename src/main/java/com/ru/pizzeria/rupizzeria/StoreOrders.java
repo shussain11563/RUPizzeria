@@ -51,27 +51,22 @@ public class StoreOrders {
      * Exports the information of the orders to a file
      * @param file the files to be exported.
      */
-    public void export(File file) throws FileNotFoundException //throws FileNotFoundException
+    public void export(File file) throws FileNotFoundException
     {
-        //add try catch for closing and file not found but idk because printwriter creates a new file, so may not be neccessary?s
         PrintWriter printWriter = new PrintWriter(file);
         printWriter.println("----------- STORE ORDERS -----------\n");
 
         for(int i = 0; i < orders.size(); i++) {
             Order order = orders.get(i);
             printWriter.println(String.format("ORDER NUMBER: %s", order.getPhoneNumber()));
-            //might just create a toString in order
             ArrayList<Pizza> pizzasInOrder = order.getPizzas();
             for(int j = 0; j < pizzasInOrder.size(); j++) {
                 Pizza pizza = pizzasInOrder.get(j);
                 printWriter.println(String.format("- %s", pizza.toString()));
             }
             printWriter.print("\n");
-
         }
-
         printWriter.close();
-
     }
 
     /**
