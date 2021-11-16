@@ -66,7 +66,7 @@ public class RuPizzeriaController implements Initializable {
     @FXML
     void openCurrentOrdersWindow(ActionEvent event) throws IOException {
         if(this.currentOrder != null) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("current-order-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("currentOrderView.fxml"));
             Parent root = (Parent) fxmlLoader.load();
 
             RuPizzaCurrentOrderController setController = fxmlLoader.getController();
@@ -89,7 +89,7 @@ public class RuPizzeriaController implements Initializable {
      */
     @FXML
     void openManageStoreOrdersWindow(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("store-orders-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("storeOrdersView.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         RuPizzaStoreOrderController setController = fxmlLoader.getController();
         setController.setMainController(this);
@@ -138,7 +138,7 @@ public class RuPizzeriaController implements Initializable {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pizza-customize-view.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pizzaCustomizeView.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 RuPizzaCustomizeController setController = fxmlLoader.getController();
                 setController.setMainController(this);
