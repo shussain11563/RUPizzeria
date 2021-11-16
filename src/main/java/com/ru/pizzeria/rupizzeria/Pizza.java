@@ -119,6 +119,6 @@ public abstract class Pizza {
             toppings += this.toppings.get(i) + ", ";
         }
 
-        return String.format("%s, %s$%s", pizzaType, toppings, df.format(this.price()));
+        return String.format("%s %s, %s$%s", this.size ,pizzaType, toppings, df.format(this.price()));
     }
 }

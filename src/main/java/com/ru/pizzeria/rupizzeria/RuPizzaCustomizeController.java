@@ -145,7 +145,7 @@ public class RuPizzaCustomizeController implements Initializable {
      * Method that alerts users that their pizza is added to their order.
      */
     public void addToOrderAlertBox() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Added to Order");
         alert.setHeaderText("Order");
         alert.setContentText("Added to Order!");
