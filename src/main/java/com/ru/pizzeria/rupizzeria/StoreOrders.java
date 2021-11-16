@@ -53,6 +53,10 @@ public class StoreOrders {
      */
     public void export(File file) throws FileNotFoundException
     {
+        if(file == null)
+        {
+            throw new FileNotFoundException();
+        }
         PrintWriter printWriter = new PrintWriter(file);
         printWriter.println("----------- STORE ORDERS -----------\n");
 
