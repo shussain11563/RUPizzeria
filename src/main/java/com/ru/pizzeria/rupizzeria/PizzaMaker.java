@@ -5,7 +5,6 @@ package com.ru.pizzeria.rupizzeria;
  * based on the type of flavor it is.
  * @author Sharia Hussain, David Lam
  */
-
 public class PizzaMaker {
     /**
      * Creates the pizza based on the flavor.

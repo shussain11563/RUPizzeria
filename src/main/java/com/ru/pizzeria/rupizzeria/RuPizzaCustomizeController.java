@@ -20,14 +20,7 @@ import java.util.*;
  * @author Sharia Hussain, David Lam
  */
 public class RuPizzaCustomizeController implements Initializable {
-    /*
-    Update Price when Adding/Removing Toppings
-    Prompt user when removing orignal/essential toppings but price doesnt change
-    Max number of toppings is 7
-    Order Comfirmation when pressing add
 
-    pr
-     */
     private ArrayList<Topping> selectedToppings;
 
     private ArrayList<Topping> additionalToppings;
@@ -113,8 +106,6 @@ public class RuPizzaCustomizeController implements Initializable {
         Pizza pizza = PizzaMaker.createPizza(pizzaFlavor); //null
         this.pizza = pizza;
 
-        //newOrder = new Order(phoneNumber);
-
         //listview
         updateListView();
 
@@ -187,7 +178,6 @@ public class RuPizzaCustomizeController implements Initializable {
         additionalToppingsListView.setItems(FXCollections.observableList(additionalToppingsList));
     }
 
-    //make less redundant
 
     /**
      * Method that handles the removal of a topping including an alert box.

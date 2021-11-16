@@ -25,13 +25,7 @@ public class RuPizzaStoreOrderController
 {
 
     @FXML
-    private Button cancelOrderButton;
-
-    @FXML
     private ComboBox<String> customerPhoneNumberComboBox;
-
-    @FXML
-    private Button exportStoreOrdersButton;
 
     @FXML
     private TextArea orderTotalTextArea;

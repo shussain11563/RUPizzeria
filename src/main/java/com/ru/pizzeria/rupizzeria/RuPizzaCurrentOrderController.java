@@ -9,7 +9,11 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Optional;
 
-
+/**
+ * RuPizzaCurrentOrderController is a class that handles all the events driven by the I/O in the application
+ * involving Store Orders.
+ * @author Sharia Hussain, David Lam
+ */
 public class RuPizzaCurrentOrderController {
 
     private Order currentOrder;
