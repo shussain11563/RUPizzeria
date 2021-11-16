@@ -94,7 +94,7 @@ public class RuPizzaCurrentOrderController {
 
         ArrayList<Pizza> pizzas = this.currentOrder.getPizzas();
         for(int i = 0; i < pizzas.size(); i++) {
-            subtotal += pizzas.get(i).getPrice();
+            subtotal += pizzas.get(i).price();
         }
 
         this.subtotal = subtotal;

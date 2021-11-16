@@ -14,7 +14,6 @@ import java.util.ArrayList;
  */
 public abstract class Pizza {
 
-    double price;
     protected ArrayList<Topping> toppings = new ArrayList<Topping>();
     protected Size size;
 
@@ -68,14 +67,6 @@ public abstract class Pizza {
      */
     public void setSize(Size size) {
         this.size = size;
-    }
-
-    /**
-     * Retrieves the price of the pizza.
-     * @return the price of the pizza.
-     */
-    public double getPrice(){
-        return this.price;
     }
 
     /**
