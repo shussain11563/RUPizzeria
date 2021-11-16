@@ -14,6 +14,9 @@ class DeluxeTest {
         Deluxe deluxe4 = new Deluxe();
         Deluxe deluxe5 = new Deluxe();
 
+        Size medium = Size.Medium;
+        Size large = Size.Large;
+
         Topping pineapple = Topping.Pineapple;
         Topping spinach = Topping.Spinach;
         Topping onion = Topping.Onion;
@@ -26,11 +29,13 @@ class DeluxeTest {
 
         deluxe3.addTopping(pineapple);
         deluxe3.addTopping(spinach);
+        deluxe3.setSize(large);
 
         deluxe4.removeTopping(onion);
         deluxe4.removeTopping(greenPepper);
         deluxe4.removeTopping(blackOlives);
         deluxe4.removeTopping(dicedTomatoes);
+        deluxe4.setSize(medium);
 
         deluxe5.addTopping(chicken);
 
@@ -42,8 +47,8 @@ class DeluxeTest {
 
         assertEquals(12.99, price1);
         assertEquals(14.48, price2);
-        assertEquals(15.97, price3);
-        assertEquals(12.99, price4);
+        assertEquals(19.97, price3);
+        assertEquals(14.99, price4);
         assertEquals(14.48, price5);
     }
 }
