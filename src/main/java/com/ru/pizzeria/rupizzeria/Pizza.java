@@ -1,5 +1,9 @@
 package com.ru.pizzeria.rupizzeria;
 
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+
 /**
  * The Pizza class acts as a blueprint for a Pizza object
  * and its subclasses such as Deluxe, Hawaiian, and Pepperoni
@@ -8,10 +12,6 @@ package com.ru.pizzeria.rupizzeria;
  * manipulation of toppings and calculation of pizzas.
  * @author Sharia Hussain, David Lam
  */
-
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-
 public abstract class Pizza {
 
     double price;
@@ -30,6 +30,10 @@ public abstract class Pizza {
     /** Constants used to calculate additional toppings and their cost */
     static final double ADDITIONAL_TOPPINGS_COST = 1.49;
 
+    /**
+     * Returns the price of the pizza
+     * @return price, the price of the pizza
+     */
     public abstract double price();
 
     /**

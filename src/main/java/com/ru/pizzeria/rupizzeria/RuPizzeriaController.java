@@ -21,14 +21,6 @@ import java.util.ResourceBundle;
  * @author Sharia Hussain, David Lam
  */
 public class RuPizzeriaController implements Initializable {
-    @FXML
-    private Button deluxePizzaButton;
-
-    @FXML
-    private Button hawaiianPizzaButton;
-
-    @FXML
-    private Button pepperoniPizzaButton;
 
     @FXML
     private TextField customerPhoneNumber;

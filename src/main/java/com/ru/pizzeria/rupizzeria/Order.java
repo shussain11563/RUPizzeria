@@ -1,14 +1,14 @@
 package com.ru.pizzeria.rupizzeria;
 
+
+import java.util.ArrayList;
+
 /**
  * Order is the class that holds a singular order with possibly multiple Pizzas.
  * Contains constructors and methods for setting, getting, and manipulating
  * pizzas in the order.
  * @author Sharia Hussain, David Lam
  */
-
-import java.util.ArrayList;
-
 public class Order {
     private String phoneNumber;
     private ArrayList<Pizza> pizzas;
