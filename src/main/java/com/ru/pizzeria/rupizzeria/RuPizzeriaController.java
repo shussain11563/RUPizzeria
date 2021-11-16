@@ -132,7 +132,8 @@ public class RuPizzeriaController implements Initializable {
         boolean isValid = checkPhoneNumber(customerPhoneNumber.getText().trim());
         boolean isSameNumber = this.currentOrder != null && (this.currentOrder.getPhoneNumber().equals(customerPhoneNumber.getText().trim()));
 
-        if(this.currentOrder == null || (isValid == true && isSameNumber == false)) {
+        if((isValid && this.currentOrder == null) || (isValid == true && isSameNumber == false))
+        {
             this.currentOrder = new Order(this.customerPhoneNumber.getText().trim());
         }
 
